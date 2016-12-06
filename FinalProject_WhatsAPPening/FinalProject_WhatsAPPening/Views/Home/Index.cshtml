@@ -22,15 +22,18 @@
                 @Html.ValidationMessageFor(model => model.Budget, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.CuisineType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="foodDropdown">Cuisine Type</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CuisineType, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CuisineType, "", new { @class = "text-danger" })
+                <select class="form-control" name="foodDropdown" id="foodDropdown">
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="vw">VW</option>
+                    <option value="audi" selected>Audi</option>
+                </select>
+                <span class="field-validation-valid text-danger" data-valmsg-for="CuisineType" data-valmsg-replace="true"></span>
             </div>
         </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
