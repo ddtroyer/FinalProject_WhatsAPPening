@@ -13,9 +13,9 @@ namespace FinalProject_WhatsAPPening.Models
         [Required(ErrorMessage = "Please Enter A Budget")]
         public int Budget { get; set; }
 
-        [DisplayName("Cusine Type")]
+        [DisplayName("Cuisine Type")]
         [Required(ErrorMessage = "Please select a Cuisine Type")]
-        public string CusineType { get; set; }
+        public string CuisineType { get; set; }
   
         //public int ZipCode { get; set; }      
         

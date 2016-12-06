@@ -3,19 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FinalProject_WhatsAPPening.Models;
 
 namespace FinalProject_WhatsAPPening.Controllers
 {
     public class HomeController : Controller
     {
+        //GET
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult About()
+        //POST
+        [HttpPost]
+        public ActionResult Index (FormCollection form)
         {
-            ViewBag.Message = "Your application description page.";
+            Request dataRequest = new Request();
+            dataRequest.Budget = int.Parse(form["Budget"]);
+            dataRequest.CuisineType = form["CuisineType"];
+            ViewBag.Message = "Results page.";
 
             return View();
         }
