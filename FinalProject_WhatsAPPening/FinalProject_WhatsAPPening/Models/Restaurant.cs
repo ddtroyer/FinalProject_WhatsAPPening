@@ -12,7 +12,7 @@ namespace FinalProject_WhatsAPPening.Models
         public string CuisineType { get; set; }
 
         [DisplayName("Price Range")]
-        public int PriceRange { get; set; }
+        public PriceRange PriceRange { get; set; }
 
         [DisplayName("Description")]
         public string Description { get; set; }
@@ -22,5 +22,13 @@ namespace FinalProject_WhatsAPPening.Models
 
         [DisplayName("Zip")]
         public int ZipCode { get; set; }      
+    }
+
+    public enum PriceRange
+    {
+        Cheap,
+        Moderate,
+        High,
+        Expensive
     }
 }
