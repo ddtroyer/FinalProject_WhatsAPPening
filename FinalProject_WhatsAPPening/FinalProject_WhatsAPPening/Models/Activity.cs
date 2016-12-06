@@ -8,22 +8,38 @@ namespace FinalProject_WhatsAPPening.Models
     //Movie class will be used in Results class
     public class Activity
     {
-        public string Name { get; set; }
+        public string Id { get; set; }
 
-        public string Description { get; set; }
-
-        public DateTime StartTime { get; set; }
-
-        public string Length { get; set; }
+        public string Category { get; set; }
 
         public string ImageUrl { get; set; }
 
-        public string Theatre { get; set; }
+        public string Link { get; set; }
 
-        public string TheatreAddress { get; set; }
+        public string Venue { get; set; }
 
-        public int TheatreZipCode { get; set; }
+        public int PricePerPerson { get; set; }
 
-        public string ActivityType { get; set; }
+        public string StreetAddress { get; set; }
+
+        public string City { get; set; }
+
+        public string State { get; set; }
+
+        public int Zip { get; set; }
+
+        public string PhoneNumber { get; set; }
+
+        public string MovieName { get; set; }
+
+        public string MovieDescription { get; set; }
+
+        public DateTime StartTime { get; set; }
+
+        public string LengthOfTime { get; set; }
+
+        public DateTime DaysOpen { get; set; }
+
+        public DateTime TimesOpen { get; set; }
     }
 }
