@@ -20,7 +20,7 @@ namespace FinalProject_WhatsAPPening.Controllers
 
         public AccountController()
         {
-        }
+        } 
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
