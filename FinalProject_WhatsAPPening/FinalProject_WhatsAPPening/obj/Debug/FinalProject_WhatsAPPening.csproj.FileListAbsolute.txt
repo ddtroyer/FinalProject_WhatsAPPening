@@ -80,3 +80,7 @@ C:\Users\Michael\Documents\GitHub\FinalProject_WhatsAPPening\FinalProject_WhatsA
 C:\Users\Michael\Documents\GitHub\FinalProject_WhatsAPPening\FinalProject_WhatsAPPening\FinalProject_WhatsAPPening\obj\Debug\FinalProject_WhatsAPPening.csprojResolveAssemblyReference.cache
 C:\Users\Michael\Documents\GitHub\FinalProject_WhatsAPPening\FinalProject_WhatsAPPening\FinalProject_WhatsAPPening\obj\Debug\FinalProject_WhatsAPPening.dll
 C:\Users\Michael\Documents\GitHub\FinalProject_WhatsAPPening\FinalProject_WhatsAPPening\FinalProject_WhatsAPPening\obj\Debug\FinalProject_WhatsAPPening.pdb
+C:\Users\Michael\Documents\GitHub\FinalProject_WhatsAPPening\FinalProject_WhatsAPPening\FinalProject_WhatsAPPening\bin\FactualDriver.dll
+C:\Users\Michael\Documents\GitHub\FinalProject_WhatsAPPening\FinalProject_WhatsAPPening\FinalProject_WhatsAPPening\bin\RestSharp.dll
+C:\Users\Michael\Documents\GitHub\FinalProject_WhatsAPPening\FinalProject_WhatsAPPening\FinalProject_WhatsAPPening\bin\YelpSharp.dll
+C:\Users\Michael\Documents\GitHub\FinalProject_WhatsAPPening\FinalProject_WhatsAPPening\FinalProject_WhatsAPPening\bin\RestSharp.xml

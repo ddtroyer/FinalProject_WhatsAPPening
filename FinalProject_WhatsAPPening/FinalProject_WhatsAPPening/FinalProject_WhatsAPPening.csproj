@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FactualDriver, Version=1.6.6.0, Culture=neutral, PublicKeyToken=ef288854c4c88a83, processorArchitecture=MSIL">
+      <HintPath>..\packages\FactualDriver.1.6.12\lib\FactualDriver.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -215,7 +219,8 @@
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\Request.cs" />
     <Compile Include="Models\Restaurant.cs" />
-    <Compile Include="Models\Result.cs" />
+    <Compile Include="QueryHelper.cs" />
+    <Compile Include="ViewModels\ResultViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -223,6 +228,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="dbo.ActivitiesList.sql" />
+    <Content Include="FactualDriver.XML" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

@@ -9,7 +9,7 @@ namespace FinalProject_WhatsAPPening.Models
     public class Restaurant
     {
         [DisplayName("Cuisine")]
-        public string CuisineType { get; set; }
+        public List<string> CuisineTypes { get; set; }
 
         [DisplayName("Price Range")]
         public PriceRange PriceRange { get; set; }

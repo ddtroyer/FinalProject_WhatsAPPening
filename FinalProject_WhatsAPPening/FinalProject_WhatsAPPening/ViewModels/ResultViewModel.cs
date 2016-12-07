@@ -7,7 +7,7 @@ using Microsoft.Owin.Security;
 
 namespace FinalProject_WhatsAPPening.Models
 {
-    public class Result
+    public class ResultViewModel
     {
         public Activity ActivityResult { get; set; }
 
