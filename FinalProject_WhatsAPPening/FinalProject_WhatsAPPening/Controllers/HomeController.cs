@@ -17,11 +17,11 @@ namespace FinalProject_WhatsAPPening.Controllers
 
         //POST
         [HttpPost]
-        public ActionResult Index (FormCollection form)
+        public ActionResult Index(FormCollection form)
         {
             Request dataRequest = new Request();
             dataRequest.Budget = int.Parse(form["Budget"]);
-            dataRequest.CuisineType = form["CuisineType"];
+            dataRequest.CuisineType = form["foodDropdown"];
             ViewBag.Message = "Results page.";
 
             return View();
