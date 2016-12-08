@@ -4,20 +4,18 @@
     ViewBag.Title = "ResultTemp";
 }
 
-<h2>ResultTemp</h2>
+<h2>Results!</h2>
+Experience @Model.ActivityResult.Category at 
 @Model.ActivityResult.Venue
-@Model.ActivityResult.Category
-
-@Model.RestaurantResult.Name
+along with a meal at 
+@Model.RestaurantResult.Name located at 
 @Model.RestaurantResult.Address
-<div>
-    <h4>Results</h4>
-    
+<div>    
     <hr />
     <dl class="dl-horizontal">
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
+
+    @Html.ActionLink("Try Again", "Index")
 </p>
