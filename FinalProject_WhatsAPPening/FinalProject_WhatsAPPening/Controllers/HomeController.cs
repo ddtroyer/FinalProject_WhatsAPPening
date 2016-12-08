@@ -33,10 +33,10 @@ namespace FinalProject_WhatsAPPening.Controllers
             dataRequest.numPeople = int.Parse(form["Number"]);
 
             ViewBag.Message = "Results page.";
-            //price is assigned to 1,2,3,or 4. This value is created by methods in the QueryHelper class
+            //'price' variable is assigned to 1,2,3,or 4. This value is created by methods in the QueryHelper class
             int price = QueryHelper.RestaurantPrice(dataRequest.Budget, dataRequest.numPeople);
 
-            //New FactualDriver object being created using variable names assigned to keys in lines 17 and 18
+            //New FactualDriver object being created using the variable names assigned to keys
             Factual Factual = new Factual(OATHKEY,OATHSECRET);
             string data = Factual.Fetch("restaurants", new Query()
                 .Field("locality")
@@ -44,9 +44,9 @@ namespace FinalProject_WhatsAPPening.Controllers
                 .Field("region")
                 .Equal("MI") //'region' field set to 'MI'
                 .Field("price")
-                .Equal(price.ToString()) //'price' field set by 'int price' variable from line 37 (int is then converted to a string) 
+                .Equal(price.ToString()) //'price' field set by 'int price' variable (int is then converted to a string) 
                 .Field("cuisine")
-                .Equal(dataRequest.CuisineType.ToLower()) //'cuisine' field set by 'dataRequest.CuisineType' variable from line 32
+                .Equal(dataRequest.CuisineType.ToLower()) //'cuisine' field set by 'dataRequest.CuisineType' variable (determined by form dropdown menu)
                 .Offset(0)
                 .Limit(40));
 
@@ -56,13 +56,15 @@ namespace FinalProject_WhatsAPPening.Controllers
 
             foreach (var gcVar in jData["response"]["data"].ToList())
             {
-                Restaurant restaurant = new Restaurant(); //each item in 'restaurants' list (from line 55) is initialized as a new 'restaurant'
+                Restaurant restaurant = new Restaurant(); //each item in 'restaurants' list is initialized as a new 'restaurant'
                 dynamic restVar = JObject.Parse(gcVar.ToString());
 
-                string tString = System.DateTime.Now.DayOfWeek.ToString().ToLower();
+                string tString = System.DateTime.Now.DayOfWeek.ToString().ToLower(); //'tString' variable assigned value based on day of the week
+                //Useful for finding hours of operation for restaurants for each day of the week
 
                 if (restVar["hours"] != null)
                 {
+                    //TODO Format restaurant hours to display correctly
                     var hours = restVar["hours"][tString];
                     restaurant.Hours = hours.ToString(); 
                 }
@@ -84,8 +86,6 @@ namespace FinalProject_WhatsAPPening.Controllers
                     restaurant.Description.Add(desVar.ToString());
                 }
                 
-                
-
                 restaurants.Add(restaurant);
 
             }
