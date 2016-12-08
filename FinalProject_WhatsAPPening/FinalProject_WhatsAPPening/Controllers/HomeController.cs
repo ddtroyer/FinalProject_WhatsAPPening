@@ -113,8 +113,8 @@ namespace FinalProject_WhatsAPPening.Controllers
             }
 
             Random rnd = new Random();
-            int restInt = rnd.Next(1, restaurants.Count());
-            int actInt = rnd.Next(1, activities.Count());
+            int restInt = rnd.Next(0, restaurants.Count());
+            int actInt = rnd.Next(0, activities.Count());
 
             Restaurant modelRestaurant = restaurants[restInt];
             Activity modelActivity = activities[actInt];
