@@ -8,7 +8,7 @@ using System.Web;
 namespace FinalProject_WhatsAPPening.Models
 {
     public class Request
-    {
+    {   //This class represents the requst form
         [DisplayName("Number of People")]
         [Required(ErrorMessage = "Please Enter the Number of People")]
         [Range(1, 10, ErrorMessage = "Number must be between 1 and 10")]
