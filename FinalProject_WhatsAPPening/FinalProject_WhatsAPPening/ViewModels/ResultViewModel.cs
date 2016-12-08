@@ -5,6 +5,7 @@ using System.Web;
 using FinalProject_WhatsAPPening.Models;
 using Microsoft.Owin.Security;
 
+
 namespace FinalProject_WhatsAPPening.Models
 {
     public class ResultViewModel

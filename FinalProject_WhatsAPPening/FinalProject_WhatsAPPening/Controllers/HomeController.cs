@@ -25,7 +25,7 @@ namespace FinalProject_WhatsAPPening.Controllers
         [HttpPost]
         public ActionResult Index(FormCollection form)
         {
-            List<Activity> activities = new List<Activity>();
+            
 
             Request dataRequest = new Request();
             dataRequest.Budget = int.Parse(form["Budget"]);
@@ -82,37 +82,37 @@ namespace FinalProject_WhatsAPPening.Controllers
                     restaurant.Description.Add(desVar.ToString());
                 }
                 
-                using (DBActivity db = new DBActivity())
-                {
-                    foreach (var activity in db.Activities)
-                    {
-                        Activity newActivity = new Activity();
-                        newActivity.Category = activity.Category;
-                        newActivity.City = activity.City;
-                        newActivity.DaysOpen = activity.DaysOpen;
-                        newActivity.Id = activity.Id;
-                        newActivity.Image = activity.Image;
-                        newActivity.LengthOfTime = activity.LengthOfTime;
-                        newActivity.Link = activity.Link;
-                        newActivity.PhoneNumber = activity.PhoneNumber;
-                        newActivity.PricePerPerson = activity.PricePerPerson;
-                        newActivity.State = activity.State;
-                        newActivity.StreetAddress = activity.StreetAddress;
-                        newActivity.TimesOpen = activity.TimesOpen;
-                        newActivity.Venue = activity.Venue;
-                        newActivity.Zip = activity.Zip;
-
-                        activities.Add(newActivity);
-                    }
-                }
-
-               
+                
 
                 restaurants.Add(restaurant);
 
             }
+            List<Activity> activities = new List<Activity>();
+            using (DBActivity db = new DBActivity())
+            {
+                foreach (var activity in db.Activities)
+                {
+                    Activity newActivity = new Activity();
+                    newActivity.Category = activity.Category;
+                    newActivity.City = activity.City;
+                    newActivity.DaysOpen = activity.DaysOpen;
+                    newActivity.Id = activity.Id;
+                    newActivity.Image = activity.Image;
+                    newActivity.LengthOfTime = activity.LengthOfTime;
+                    newActivity.Link = activity.Link;
+                    newActivity.PhoneNumber = activity.PhoneNumber;
+                    newActivity.PricePerPerson = activity.PricePerPerson;
+                    newActivity.State = activity.State;
+                    newActivity.StreetAddress = activity.StreetAddress;
+                    newActivity.TimesOpen = activity.TimesOpen;
+                    newActivity.Venue = activity.Venue;
+                    newActivity.Zip = activity.Zip;
 
-           
+                    activities.Add(newActivity);
+                }
+            }
+
+
             return View("Activity", activities);
             //return View("RestaurantsTemp",restaurants);
             
