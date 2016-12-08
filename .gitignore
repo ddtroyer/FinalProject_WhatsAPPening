@@ -140,11 +140,8 @@ publish/
 *.[Pp]ublish.xml
 *.azurePubxml
 
-<<<<<<< HEAD
 # TODO: Un-comment the next line if you do not want to checkin
-=======
-# TODO: Un-comment the next line if you do not want to checkin 
->>>>>>> origin/master
+
 # your web deploy settings because they may include unencrypted
 # passwords
 #*.pubxml
@@ -170,12 +167,11 @@ csx/
 ecf/
 rcf/
 
-<<<<<<< HEAD
-=======
+
 # Microsoft Azure ApplicationInsights config file
 ApplicationInsights.config
 
->>>>>>> origin/master
+
 # Windows Store app package directory
 AppPackages/
 BundleArtifacts/
@@ -249,8 +245,6 @@ ModelManifest.xml
 .paket/paket.exe
 
 # FAKE - F# Make
-<<<<<<< HEAD
+
 .fake/
-=======
-.fake/
->>>>>>> origin/master
+
