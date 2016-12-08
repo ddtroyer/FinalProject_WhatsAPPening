@@ -13,6 +13,7 @@ namespace FinalProject_WhatsAPPening.Controllers
 
     public class HomeController : Controller
     {
+        //Assigning keys to shorter variable names
         public const string OATHKEY = "FxpykhYWyCQ3Gsm58GhTVpnWNeY66aB1lwwXkV3g";
         public const string OATHSECRET = "9xNJ1Swu3nKKyReU668knmNGGZqqhAtF1gnOQEQW";
         //GET
@@ -25,36 +26,37 @@ namespace FinalProject_WhatsAPPening.Controllers
         [HttpPost]
         public ActionResult Index(FormCollection form)
         {
-            
-
+            //variables assigned values based on user values entered in the form (# of people, Budget, and Cuisine Type)
             Request dataRequest = new Request();
             dataRequest.Budget = int.Parse(form["Budget"]);
             dataRequest.CuisineType = form["foodDropdown"];
             dataRequest.numPeople = int.Parse(form["Number"]);
 
             ViewBag.Message = "Results page.";
+            //price is assigned to 1,2,3,or 4. This value is created by methods in the QueryHelper class
             int price = QueryHelper.RestaurantPrice(dataRequest.Budget, dataRequest.numPeople);
 
+            //New FactualDriver object being created using variable names assigned to keys in lines 17 and 18
             Factual Factual = new Factual(OATHKEY,OATHSECRET);
             string data = Factual.Fetch("restaurants", new Query()
                 .Field("locality")
-                .Equal("Grand Rapids")
+                .Equal("Grand Rapids") //'locality' field set to 'Grand Rapids'
                 .Field("region")
-                .Equal("MI")
+                .Equal("MI") //'region' field set to 'MI'
                 .Field("price")
-                .Equal(price.ToString())
+                .Equal(price.ToString()) //'price' field set by 'int price' variable from line 37 (int is then converted to a string) 
                 .Field("cuisine")
-                .Equal(dataRequest.CuisineType.ToLower())
+                .Equal(dataRequest.CuisineType.ToLower()) //'cuisine' field set by 'dataRequest.CuisineType' variable from line 32
                 .Offset(0)
                 .Limit(40));
 
-            var jData = JObject.Parse(data);
+            var jData = JObject.Parse(data); //data (found on line 41) being Parsed from a string to JObject type
 
-            List<Restaurant> restaurants = new List<Restaurant>();
+            List<Restaurant> restaurants = new List<Restaurant>(); //initializing a new list of resaurants
 
             foreach (var gcVar in jData["response"]["data"].ToList())
             {
-                Restaurant restaurant = new Restaurant();
+                Restaurant restaurant = new Restaurant(); //each item in 'restaurants' list (from line 55) is initialized as a new 'restaurant'
                 dynamic restVar = JObject.Parse(gcVar.ToString());
 
                 string tString = System.DateTime.Now.DayOfWeek.ToString().ToLower();
