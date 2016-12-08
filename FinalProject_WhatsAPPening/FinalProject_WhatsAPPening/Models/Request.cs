@@ -11,6 +11,7 @@ namespace FinalProject_WhatsAPPening.Models
     {
         [DisplayName("Number of People")]
         [Required(ErrorMessage = "Please Enter the Number of People")]
+        [Range(1, 10, ErrorMessage = "Number must be between 1 and 10")]
         public int Number { get; set; }
 
         [DisplayName("Budget")]
