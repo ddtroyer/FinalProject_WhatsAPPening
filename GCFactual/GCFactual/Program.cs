@@ -40,7 +40,7 @@ namespace GCFactual
             foreach (var s in gcJObject["response"]["data"].ToList())
             {
                 ;
-                
+                Console.WriteLine(s.ToString());
                 dynamic info = JObject.Parse(s.ToString());
 
                 string name = info.name;
@@ -72,13 +72,18 @@ namespace GCFactual
                 if (info.hours != null)
                 {
                     var hours = info.hours;
-                    foreach (var hoursVar in hours)
+                    var sunday = hours.sunday;
+                    string tString = System.DateTime.Now.DayOfWeek.ToString().ToLower();
+                    var today = hours[tString];
+                    foreach (var time in today)
                     {
-                        Console.WriteLine(hoursVar);
-                        
+                        Console.WriteLine(time.ToString());
                     }
+                    Console.WriteLine(today.ToString());
+                    Console.WriteLine(sunday.ToString());
                 }
 
+                Console.WriteLine(System.DateTime.Now.DayOfWeek.ToString());
 
                 Console.ReadLine();
               

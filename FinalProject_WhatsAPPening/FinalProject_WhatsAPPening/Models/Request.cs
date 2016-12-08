@@ -20,8 +20,10 @@ namespace FinalProject_WhatsAPPening.Models
         [DisplayName("Cuisine Type")]
         [Required(ErrorMessage = "Please select a Cuisine Type")]
         public string CuisineType { get; set; }
-  
+
+        [DisplayName("Number of People")]
+        public int numPeople { get; set; }
         //public int ZipCode { get; set; }      
-        
+
     }
 }
