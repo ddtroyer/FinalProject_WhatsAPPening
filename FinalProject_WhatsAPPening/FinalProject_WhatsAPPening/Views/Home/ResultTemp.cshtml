@@ -1,0 +1,23 @@
+﻿@model FinalProject_WhatsAPPening.Models.ResultViewModel
+
+@{
+    ViewBag.Title = "ResultTemp";
+}
+
+<h2>ResultTemp</h2>
+@Model.ActivityResult.Venue
+@Model.ActivityResult.Category
+
+@Model.RestaurantResult.Name
+@Model.RestaurantResult.Address
+<div>
+    <h4>Results</h4>
+    
+    <hr />
+    <dl class="dl-horizontal">
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
