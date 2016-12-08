@@ -8,6 +8,7 @@ namespace FinalProject_WhatsAPPening
 
     public partial class Activity
     {
+        //Activity class properties
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
