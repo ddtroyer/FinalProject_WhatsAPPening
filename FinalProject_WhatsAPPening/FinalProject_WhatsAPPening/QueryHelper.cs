@@ -11,10 +11,10 @@ namespace FinalProject_WhatsAPPening
         {
             if (people == null)
             {
-                people = 2;
+                people = 2;     //If number of people is not entered by the user, number of peeople is set to 2 by default
             }
 
-            double budgetPerPerson = (double) (budget*.5/people);
+            double budgetPerPerson = (double) (budget*.5/people);   //Takes half of the total budget for the resaurant. Assumes the other half will go towards 'Activity'
 
             if (budgetPerPerson <= 10)
             {
@@ -31,8 +31,7 @@ namespace FinalProject_WhatsAPPening
             else
             {
                 return 4;
-
             }
-        }
+        }   //These values of 1, 2, 3, or 4 determine the value assigned to 'int price' variable in the HomeController
     }
 }
