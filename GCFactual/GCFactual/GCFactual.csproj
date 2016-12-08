@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FactualDriver, Version=1.6.6.0, Culture=neutral, PublicKeyToken=ef288854c4c88a83, processorArchitecture=MSIL">
-      <HintPath>..\..\FinalProject_WhatsAPPening\packages\FactualDriver.1.6.11\lib\FactualDriver.dll</HintPath>
+      <HintPath>..\..\FinalProject_WhatsAPPening\packages\FactualDriver.1.6.12\lib\FactualDriver.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

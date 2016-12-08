@@ -1,61 +1,67 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Web;
-
-namespace FinalProject_WhatsAPPening.Models
+namespace FinalProject_WhatsAPPening
 {
-    //Movie class will be used in Results class
-    public class Activity
-    {
-        public string Id { get; set; }
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
 
-        [DisplayName("Category")]
+    public partial class Activity
+    {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Id { get; set; }
+
+        [Required]
+        [StringLength(50)]
         public string Category { get; set; }
 
-        public string ImageUrl { get; set; }
+        public string Image { get; set; }
 
-        [DisplayName("Link")]
         public string Link { get; set; }
 
-        [DisplayName("Venue")]
+        [Required]
+        [StringLength(50)]
         public string Venue { get; set; }
 
-        [DisplayName("Price Per Person")]
-        public int PricePerPerson { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string PricePerPerson { get; set; }
 
-        [DisplayName("Street Address")]
+        [Required]
+        [StringLength(50)]
         public string StreetAddress { get; set; }
 
-        [DisplayName("City")]
+        [Required]
+        [StringLength(50)]
         public string City { get; set; }
 
-        [DisplayName("State")]
+        [Required]
+        [StringLength(50)]
         public string State { get; set; }
 
-        [DisplayName("Zip")]
-        public int Zip { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string Zip { get; set; }
 
-        [DisplayName("Phone Number")]
+        [StringLength(50)]
         public string PhoneNumber { get; set; }
 
-        [DisplayName("Title")]
+        [StringLength(50)]
         public string MovieName { get; set; }
 
-        [DisplayName("Description")]
+        [StringLength(50)]
         public string MovieDescription { get; set; }
 
-        [DisplayName("Start Time")]
-        public DateTime StartTime { get; set; }
+        [StringLength(50)]
+        public string StartTime { get; set; }
 
-        [DisplayName("Length Of Time")]
+        [StringLength(50)]
         public string LengthOfTime { get; set; }
 
-        [DisplayName("Days Open")]
-        public DateTime DaysOpen { get; set; }
+        [StringLength(50)]
+        public string DaysOpen { get; set; }
 
-        [DisplayName("Times Open")]
-        public DateTime TimesOpen { get; set; }
+        [StringLength(50)]
+        public string TimesOpen { get; set; }
     }
 }
