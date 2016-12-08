@@ -7,10 +7,14 @@ namespace FinalProject_WhatsAPPening
 {
     public class QueryHelper
     {
-        public static int RestaurantPrice(int budget, int people)
+        public static int RestaurantPrice(int budget, int? people)
         {
+            if (people == null)
+            {
+                people = 2;
+            }
 
-            int budgetPerPerson = (int) (budget*.5/people);
+            double budgetPerPerson = (double) (budget*.5/people);
 
             if (budgetPerPerson < 10)
             {
