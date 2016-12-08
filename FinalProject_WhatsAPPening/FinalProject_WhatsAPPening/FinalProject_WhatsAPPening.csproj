@@ -290,6 +290,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\RestaurantsTemp.cshtml" />
     <Content Include="Views\Home\Activity.cshtml" />
+    <Content Include="Views\Home\ResultTemp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
