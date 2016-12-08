@@ -9,6 +9,10 @@ namespace FinalProject_WhatsAPPening.Models
 {
     public class Request
     {
+        [DisplayName("Number of People")]
+        [Required(ErrorMessage = "Please Enter the Number of People")]
+        public int Number { get; set; }
+
         [DisplayName("Budget")]
         [Required(ErrorMessage = "Please Enter A Budget")]
         public int Budget { get; set; }
