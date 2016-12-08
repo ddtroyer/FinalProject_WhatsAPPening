@@ -28,7 +28,7 @@ namespace FinalProject_WhatsAPPening.Controllers
             Request dataRequest = new Request();
             dataRequest.Budget = int.Parse(form["Budget"]);
             dataRequest.CuisineType = form["foodDropdown"];
-            //dataRequest.numPeople = int.Parse(form["numPeople"]);
+            dataRequest.numPeople = int.Parse(form["Number"]);
 
             ViewBag.Message = "Results page.";
             int price = QueryHelper.RestaurantPrice(dataRequest.Budget, dataRequest.numPeople);
@@ -41,8 +41,8 @@ namespace FinalProject_WhatsAPPening.Controllers
                 .Equal("MI")
                 .Field("price")
                 .Equal(price.ToString())
-                //.Field("cuisine")
-                //.Equal(dataRequest.CuisineType.ToLower())
+                .Field("cuisine")
+                .Equal(dataRequest.CuisineType.ToLower())
                 .Offset(0)
                 .Limit(40));
 

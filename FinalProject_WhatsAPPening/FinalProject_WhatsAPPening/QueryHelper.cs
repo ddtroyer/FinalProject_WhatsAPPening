@@ -16,15 +16,15 @@ namespace FinalProject_WhatsAPPening
 
             double budgetPerPerson = (double) (budget*.5/people);
 
-            if (budgetPerPerson < 10)
+            if (budgetPerPerson <= 10)
             {
                 return 1;
             }
-            else if (budgetPerPerson < 30)
+            else if (budgetPerPerson <= 30)
             {
                 return 2;
             }
-            else if (budgetPerPerson < 60)
+            else if (budgetPerPerson <= 60)
             {
                 return 3;
             }
