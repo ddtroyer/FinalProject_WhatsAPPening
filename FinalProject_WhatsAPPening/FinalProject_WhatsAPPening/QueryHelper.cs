@@ -7,7 +7,7 @@ namespace FinalProject_WhatsAPPening
 {
     public class QueryHelper
     {
-        public static int RestaurantPrice(int budget, int? people)
+        public static int RestaurantPrice(int budget, int? people) //the budget parameter must be entered. People is set by default if that parameter is not entered
         {
             if (people == null)
             {
