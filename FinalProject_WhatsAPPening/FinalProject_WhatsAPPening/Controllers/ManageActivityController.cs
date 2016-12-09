@@ -12,7 +12,7 @@ namespace FinalProject_WhatsAPPening.Controllers
         // GET: ManageActivity
         public ActionResult Create()
         {
-            return View();
+            return View("AddActivityView");
         }
         // POST:
         [HttpPost]
