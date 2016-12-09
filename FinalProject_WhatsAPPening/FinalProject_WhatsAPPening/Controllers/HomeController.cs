@@ -99,8 +99,6 @@ namespace FinalProject_WhatsAPPening.Controllers
                     newActivity.City = activity.City;
                     newActivity.DaysOpen = activity.DaysOpen;
                     newActivity.Id = activity.Id;
-                    newActivity.Image = activity.Image;
-                    newActivity.LengthOfTime = activity.LengthOfTime;
                     newActivity.Link = activity.Link;
                     newActivity.PhoneNumber = activity.PhoneNumber;
                     newActivity.PricePerPerson = activity.PricePerPerson;

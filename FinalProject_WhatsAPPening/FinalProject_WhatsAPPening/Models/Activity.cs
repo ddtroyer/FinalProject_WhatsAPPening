@@ -16,8 +16,6 @@ namespace FinalProject_WhatsAPPening
         [StringLength(50)]
         public string Category { get; set; }
 
-        public string Image { get; set; }
-
         public string Link { get; set; }
 
         [Required]
@@ -46,18 +44,6 @@ namespace FinalProject_WhatsAPPening
 
         [StringLength(50)]
         public string PhoneNumber { get; set; }
-
-        [StringLength(50)]
-        public string MovieName { get; set; }
-
-        [StringLength(50)]
-        public string MovieDescription { get; set; }
-
-        [StringLength(50)]
-        public string StartTime { get; set; }
-
-        [StringLength(50)]
-        public string LengthOfTime { get; set; }
 
         [StringLength(50)]
         public string DaysOpen { get; set; }
