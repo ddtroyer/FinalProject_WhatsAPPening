@@ -25,8 +25,6 @@ namespace FinalProject_WhatsAPPening.Controllers
             addActivity.City = collection["City"];
             addActivity.DaysOpen = collection["DaysOpen"];
             //addActivity.Id = collection["Id"];
-            addActivity.Image = collection["Image"];
-            addActivity.LengthOfTime = collection["LengthOfTime"];
             addActivity.Link = collection["Link"];
             addActivity.PhoneNumber = collection["PhoneNumber"];
             addActivity.PricePerPerson = collection["PricePerPerson"];
