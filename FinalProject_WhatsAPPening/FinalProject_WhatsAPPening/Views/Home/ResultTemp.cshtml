@@ -5,15 +5,10 @@
 }
 
 <h2>Results!</h2>
-Experience @Model.ActivityResult.Category at 
-@Model.ActivityResult.Venue
-along with a meal at 
-@Model.RestaurantResult.Name located at 
-@Model.RestaurantResult.Address
-<div>    
+Experience @Model.ActivityResult.Category at <span title="@Model.ActivityResult.StreetAddress">@Model.ActivityResult.Venue</span> along with a meal at <span title="@Model.RestaurantResult.Address"> @Model.RestaurantResult.Name </span>
+<div>
     <hr />
-    <dl class="dl-horizontal">
-    </dl>
+    <dl class="dl-horizontal"></dl>
 </div>
 <p>
 
