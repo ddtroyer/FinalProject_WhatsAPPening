@@ -205,6 +205,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ManageActivityController.cs" />
     <Compile Include="Models\Activity.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -291,6 +292,7 @@
     <Content Include="Views\Home\RestaurantsTemp.cshtml" />
     <Content Include="Views\Home\Activity.cshtml" />
     <Content Include="Views\Home\ResultTemp.cshtml" />
+    <Content Include="Views\ManageActivity\AddActivityView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
