@@ -36,9 +36,9 @@ namespace FinalProject_WhatsAPPening.Controllers
             //'price' variable is assigned to 1,2,3,or 4. This value is created by methods in the QueryHelper class
             int price = QueryHelper.RestaurantPrice(dataRequest.Budget, dataRequest.numPeople);
 
-            //New FactualDriver object being created using the variable names assigned to keys
+            //New FactualDriver object being created using the variable names previously assigned to keys
             Factual Factual = new Factual(OATHKEY,OATHSECRET);
-            string data = Factual.Fetch("restaurants", new Query()
+            string data = Factual.Fetch("restaurants", new Query() //The Fetch method parameters require a table name and a new query.
                 .Field("locality")
                 .Equal("Grand Rapids") //'locality' field set to 'Grand Rapids'
                 .Field("region")
@@ -50,17 +50,17 @@ namespace FinalProject_WhatsAPPening.Controllers
                 .Offset(0)
                 .Limit(40));
 
-            var jData = JObject.Parse(data); //data (found on line 41) being Parsed from a string to JObject type
+            var jData = JObject.Parse(data); //'data' is being Parsed from string to JObject type
 
             List<Restaurant> restaurants = new List<Restaurant>(); //initializing a new list of resaurants
 
             foreach (var gcVar in jData["response"]["data"].ToList())
             {
-                Restaurant restaurant = new Restaurant(); //each item in 'restaurants' list is initialized as a new 'restaurant'
-                dynamic restVar = JObject.Parse(gcVar.ToString());
+                Restaurant restaurant = new Restaurant(); //Each item in 'restaurants' list is initialized as a new 'restaurant'
+                dynamic restVar = JObject.Parse(gcVar.ToString()); //'restVar' is created and holds the properties of a Resaurant object (these properties are from the Restaurant class: name, address, etc...)
 
                 string tString = System.DateTime.Now.DayOfWeek.ToString().ToLower(); //'tString' variable assigned value based on day of the week
-                //Useful for finding hours of operation for restaurants for each day of the week
+                //Used for finding hours of operation for restaurants for the current day of the week
 
                 if (restVar["hours"] != null)
                 {
@@ -68,25 +68,25 @@ namespace FinalProject_WhatsAPPening.Controllers
                     var hours = restVar["hours"][tString];
                     restaurant.Hours = hours.ToString(); 
                 }
-
+                //The new Restaurant object named 'restaurant' has its properties assigned values. These values are taken from the 'restVar' variable
                 restaurant.Name = restVar.name;
-                restaurant.PriceRange = (PriceRange)restVar.price;
+                restaurant.PriceRange = (PriceRange)restVar.price; //'PriceRange' is an enum found in the Restaurant class
                 restaurant.Address = restVar.address;
                 restaurant.ZipCode = restVar.postcode;
 
-                restaurant.CuisineTypes = new List<string>();
+                restaurant.CuisineTypes = new List<string>(); //Many restaurants serve multiple cuisine types so a list is created to display these types
                 foreach (var cuisineVar in restVar.cuisine)
                 {
-                    restaurant.CuisineTypes.Add(cuisineVar.ToString());
+                    restaurant.CuisineTypes.Add(cuisineVar.ToString()); //The foreach loop iterates through the multiple types and adds them to the 'restaurant.CuisineTypes' list
                 }
 
-                restaurant.Description = new List<string>();
+                restaurant.Description = new List<string>(); //Like the cuisine types list and foreach loop, but for restaurant description
                 foreach (var desVar in restVar.category_labels)
                 {
                     restaurant.Description.Add(desVar.ToString());
                 }
                 
-                restaurants.Add(restaurant);
+                restaurants.Add(restaurant); //Now the 'restaurant' is added to the list named 'restaurants' and the foreach loop repeats this process (starting at line 57)
 
             }
             List<Activity> activities = new List<Activity>();
@@ -127,8 +127,8 @@ namespace FinalProject_WhatsAPPening.Controllers
             result.ActivityResult = modelActivity;
             return View("ResultTemp", result);
 
-            //return View("Activity", activities);
-            //return View("RestaurantsTemp",restaurants);
+            //return View("Activity", activities); DELETE THIS?
+            //return View("RestaurantsTemp",restaurants); DELETE THIS?
 
         }
 
