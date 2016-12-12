@@ -18,20 +18,20 @@ namespace FinalProject_WhatsAPPening
 
             if (budgetPerPerson <= 10)
             {
-                return 1;
+                return 0;
             }
             else if (budgetPerPerson <= 30)
             {
-                return 2;
+                return 1;
             }
             else if (budgetPerPerson <= 60)
             {
-                return 3;
+                return 2;
             }
             else
             {
-                return 4;
+                return 3;
             }
-        }   //These values of 1, 2, 3, or 4 determine the value assigned to 'int price' variable in the HomeController
+        }   //These values of 0, 1, 2, or 3 determine the value assigned to 'int price' variable in the HomeController
     }
 }
