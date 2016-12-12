@@ -5,7 +5,18 @@
 }
 
 <h2>Results!</h2>
-Experience @Model.ActivityResult.Category at <a href="@Model.ActivityResult.Link" target="_blank"<span title="@Model.ActivityResult.StreetAddress">@Model.ActivityResult.Venue</span></a> along with a meal at <span title="@Model.RestaurantResult.Address"> @Model.RestaurantResult.Name </span>
+Experience @Model.ActivityResult.Category at
+
+<a href="@Model.ActivityResult.Link" target="_blank">
+    <span title="@Model.ActivityResult.StreetAddress">@Model.ActivityResult.Venue</span>
+</a>
+
+along with a meal at
+
+<a href="@Model.RestaurantResult.Website" target="_blank">
+    <span title="@Model.RestaurantResult.Address"> @Model.RestaurantResult.Name </span>
+</a>
+
 <div>
     <hr />
     <dl class="dl-horizontal"></dl>

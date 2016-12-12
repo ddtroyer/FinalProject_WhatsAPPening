@@ -27,7 +27,10 @@ namespace FinalProject_WhatsAPPening.Models
         public string Hours { get; set; }
 
         [DisplayName("Zip")]
-        public int ZipCode { get; set; }      
+        public int ZipCode { get; set; }
+
+        [DisplayName("Website")]
+        public string Website { get; set; }
     }
 
     public enum PriceRange

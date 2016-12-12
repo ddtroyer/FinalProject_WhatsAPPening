@@ -77,6 +77,7 @@ namespace FinalProject_WhatsAPPening.Controllers
                 restaurant.PriceRange = (PriceRange)restVar.price; //'PriceRange' is an enum found in the Restaurant class
                 restaurant.Address = restVar.address;
                 restaurant.ZipCode = restVar.postcode;
+                restaurant.Website = restVar.website;
 
                 restaurant.CuisineTypes = new List<string>(); //Many restaurants serve multiple cuisine types so a list is created to display these types
                 foreach (var cuisineVar in restVar.cuisine)
