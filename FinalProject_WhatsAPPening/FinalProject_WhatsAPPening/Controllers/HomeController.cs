@@ -133,10 +133,6 @@ namespace FinalProject_WhatsAPPening.Controllers
             result.RestaurantResult = modelRestaurant;
             result.ActivityResult = modelActivity;
             return View("ResultTemp", result);
-
-            //return View("Activity", activities); DELETE THIS?
-            //return View("RestaurantsTemp",restaurants); DELETE THIS?
-
         }
 
         public ActionResult Contact()
