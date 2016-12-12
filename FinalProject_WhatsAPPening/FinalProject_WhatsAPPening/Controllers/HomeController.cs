@@ -92,23 +92,26 @@ namespace FinalProject_WhatsAPPening.Controllers
             List<Activity> activities = new List<Activity>();
             using (DBActivity db = new DBActivity())
             {
-                foreach (var activity in db.Activities.Where(P <= (dataRequest.Budget * .5 / dataRequest.numPeople)))
+                foreach (var activity in db.Activities)
                 {
-                    Activity newActivity = new Activity();
-                    newActivity.Category = activity.Category;
-                    newActivity.City = activity.City;
-                    newActivity.DaysOpen = activity.DaysOpen;
-                    newActivity.Id = activity.Id;
-                    newActivity.Link = activity.Link;
-                    newActivity.PhoneNumber = activity.PhoneNumber;
-                    newActivity.PricePerPerson = activity.PricePerPerson;
-                    newActivity.State = activity.State;
-                    newActivity.StreetAddress = activity.StreetAddress;
-                    newActivity.TimesOpen = activity.TimesOpen;
-                    newActivity.Venue = activity.Venue;
-                    newActivity.Zip = activity.Zip;
+                    if (int.Parse(activity.PricePerPerson) <= (dataRequest.Budget * .5 / dataRequest.numPeople))
+                    {
+                        Activity newActivity = new Activity();
+                        newActivity.Category = activity.Category;
+                        newActivity.City = activity.City;
+                        newActivity.DaysOpen = activity.DaysOpen;
+                        newActivity.Id = activity.Id;
+                        newActivity.Link = activity.Link;
+                        newActivity.PhoneNumber = activity.PhoneNumber;
+                        newActivity.PricePerPerson = activity.PricePerPerson;
+                        newActivity.State = activity.State;
+                        newActivity.StreetAddress = activity.StreetAddress;
+                        newActivity.TimesOpen = activity.TimesOpen;
+                        newActivity.Venue = activity.Venue;
+                        newActivity.Zip = activity.Zip;
 
-                    activities.Add(newActivity);
+                        activities.Add(newActivity);
+                    }
                 }
             }
 
