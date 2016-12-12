@@ -12,21 +12,29 @@
         <h4>Enter the number of people and total budget, then select a cuisine type: </h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @*Number of People*@
         <div class="form-group">
             @Html.LabelFor(model => model.Number, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Number, new { htmlAttributes = new { @class = "form-control", @min = "1", @max = "10"} })
+                @Html.EditorFor(model => model.Number, new { htmlAttributes = new { @class = "form-control", @min = "1", @max = "10" } })
                 @Html.ValidationMessageFor(model => model.Number, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
+
+        
+
+        @*Budget*@
+        <div class="form-group" > 
             @Html.LabelFor(model => model.Budget, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-10"> 
                 @Html.EditorFor(model => model.Budget, new { htmlAttributes = new { @class = "form-control", @min = "0" } })
                 @Html.ValidationMessageFor(model => model.Budget, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        @*Cuisine Type*@
         <div class="form-group">
             <label class="control-label col-md-2" for="foodDropdown">Cuisine</label>
             <div class="col-md-10">
@@ -42,11 +50,35 @@
                 <span class="field-validation-valid text-danger" data-valmsg-for="CuisineType" data-valmsg-replace="true"></span>
             </div>
         </div>
+
+        @*Zip Code*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.Zipcode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Zipcode, new { htmlAttributes = new { @class = "form-control", @min = "0" } })
+                @Html.ValidationMessageFor(model => model.Zipcode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+       
+
+        @*Go! button*@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Go!" class="btn btn-default" />
             </div>
         </div>
+
+        @*Random button*@
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="No strings? Click here!" class="btn btn-default" @*style="display: block; margin: 0 auto;"*@ />
+            </div>
+        </div>
+
+
+
+
+
     </div>
 }
 
