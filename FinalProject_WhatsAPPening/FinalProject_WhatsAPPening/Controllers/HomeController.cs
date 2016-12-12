@@ -98,7 +98,8 @@ namespace FinalProject_WhatsAPPening.Controllers
             {
                 foreach (var activity in db.Activities)
                 {
-                    if (int.Parse(activity.PricePerPerson) <= (dataRequest.Budget * .5 / dataRequest.numPeople))
+                    if(activity.PricePerPerson != null)
+                    if (double.Parse(activity.PricePerPerson.Substring(1)) <= (dataRequest.Budget * .5 / dataRequest.numPeople))
                     {
                         Activity newActivity = new Activity();
                         newActivity.Category = activity.Category;
