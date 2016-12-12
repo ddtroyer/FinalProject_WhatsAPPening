@@ -24,7 +24,6 @@ namespace FinalProject_WhatsAPPening.Controllers
                 Activity addActivity = new Activity();
 
                 addActivity.Venue = collection["Venue"];
-                
                 db2.Activities.Add(addActivity);
                 db2.SaveChanges();
 
