@@ -39,16 +39,12 @@ namespace FinalProject_WhatsAPPening.Controllers
 
             //New FactualDriver object being created using the variable names previously assigned to keys
             Factual Factual = new Factual(OATHKEY,OATHSECRET);
-            string data = Factual.Fetch("restaurants", new Query() //The Fetch method parameters require a table name and a new query.
-                //.Field("locality")
-                //.Equal("Grand Rapids") //'locality' field set to 'Grand Rapids'
-                //.Field("region")
-                //.Equal("MI") //'region' field set to 'MI'
+            string data = Factual.Fetch("restaurants", new Query() //The Fetch method parameters require a table name and a new query
                 .Field("price")
                 .Equal(price.ToString()) //'price' field set by 'int price' variable (int is then converted to a string) 
                 .Field("cuisine")
                 .Equal(dataRequest.CuisineType.ToLower()) //'cuisine' field set by 'dataRequest.CuisineType' variable (determined by form dropdown menu)
-                .Field("zipcode")
+                .Field("postcode")
                 .Equal(dataRequest.Zipcode)
                 .Offset(0)
                 .Limit(40));

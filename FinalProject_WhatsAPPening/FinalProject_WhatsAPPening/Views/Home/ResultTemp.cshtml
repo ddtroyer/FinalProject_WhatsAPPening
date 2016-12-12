@@ -4,31 +4,29 @@
     ViewBag.Title = "ResultTemp";
 }
 
-<h2>Results!</h2>
+<h1>Results!</h1>
 
 
-    <font size="6">
-        What to Do:
+    <font size="5">
+        What to do:
         <a href="@Model.ActivityResult.Link" target="_blank">
+            @Model.ActivityResult.Venue</a> located at @Model.ActivityResult.StreetAddress , @Model.ActivityResult.City
 
-            <span title="@Model.ActivityResult.StreetAddress">@Model.ActivityResult.Venue</span>
-
-        </a>
+        <p>Price per person: $@Model.ActivityResult.PricePerPerson</p>
 
         <br />
 
         Where to Eat:
         <a href="@Model.RestaurantResult.Website" target="_blank">
-            <span title="@Model.RestaurantResult.Address"> @Model.RestaurantResult.Name</span>
-        </a>
-    </font>
+             @Model.RestaurantResult.Name</a> located at @Model.RestaurantResult.Address 
+        <p>Price per person: @Model.RestaurantResult.PriceRange</p>
 
+    </font>
 
 <div>
     <hr />
     <dl class="dl-horizontal"></dl>
 </div>
-
 <p>
 
     @Html.ActionLink("Try Again", "Index")
