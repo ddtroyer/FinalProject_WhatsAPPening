@@ -5,17 +5,24 @@
 }
 
 <h2>Results!</h2>
-Experience @Model.ActivityResult.Category at
 
-<a href="@Model.ActivityResult.Link" target="_blank">
-    <span title="@Model.ActivityResult.StreetAddress">@Model.ActivityResult.Venue</span>
-</a>
 
-along with a meal at
+    <font size="6">
+        What to do:
+        <a href="@Model.ActivityResult.Link" target="_blank">
 
-<a href="@Model.RestaurantResult.Website" target="_blank">
-    <span title="@Model.RestaurantResult.Address"> @Model.RestaurantResult.Name </span>
-</a>
+            <span title="@Model.ActivityResult.StreetAddress">@Model.ActivityResult.Venue</span>
+
+        </a>
+
+        <br />
+
+        Where to Eat:
+        <a href="@Model.RestaurantResult.Website" target="_blank">
+            <span title="@Model.RestaurantResult.Address"> @Model.RestaurantResult.Name</span>
+        </a>
+    </font>
+
 
 <div>
     <hr />
