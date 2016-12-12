@@ -92,7 +92,7 @@ namespace FinalProject_WhatsAPPening.Controllers
             List<Activity> activities = new List<Activity>();
             using (DBActivity db = new DBActivity())
             {
-                foreach (var activity in db.Activities)
+                foreach (var activity in db.Activities.Where(P <= (dataRequest.Budget * .5 / dataRequest.numPeople)))
                 {
                     Activity newActivity = new Activity();
                     newActivity.Category = activity.Category;
