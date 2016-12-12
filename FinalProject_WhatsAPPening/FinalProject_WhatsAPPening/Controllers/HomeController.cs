@@ -66,7 +66,11 @@ namespace FinalProject_WhatsAPPening.Controllers
                 {
                     //TODO Format restaurant hours to display correctly
                     var hours = restVar["hours"][tString];
-                    restaurant.Hours = hours.ToString(); 
+                    if (hours != null)
+                    {
+                        restaurant.Hours = hours.ToString();
+                    }
+                    
                 }
                 //The new Restaurant object named 'restaurant' has its properties assigned values. These values are taken from the 'restVar' variable
                 restaurant.Name = restVar.name;
