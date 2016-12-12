@@ -1,51 +1,39 @@
-﻿using System;
+﻿using FinalProject_WhatsAPPening.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using FinalProject_WhatsAPPening.Models;
 using FactualDriver;
 using Newtonsoft.Json.Linq;
 
-
 namespace FinalProject_WhatsAPPening.Controllers
 {
-
-    public class HomeController : Controller
+    public class RandomController : Controller
     {
         //Assigning keys to shorter variable names
         public const string OATHKEY = "FxpykhYWyCQ3Gsm58GhTVpnWNeY66aB1lwwXkV3g";
         public const string OATHSECRET = "9xNJ1Swu3nKKyReU668knmNGGZqqhAtF1gnOQEQW";
-        //GET
-        public ActionResult Index()
+
+        // GET: Random
+        public ActionResult Random()
         {
             return View();
         }
 
-        //POST
+        //POST: Random
         [HttpPost]
-        public ActionResult Index(FormCollection form)
+        public ActionResult Random(FormCollection form)
         {
-            //Variables assigned values based on user values entered in the form (# of people, Budget, and Cuisine Type)
-            Request dataRequest = new Request();
-            dataRequest.numPeople = int.Parse(form["Number"]);
-            dataRequest.Budget = int.Parse(form["Budget"]);
-            dataRequest.CuisineType = form["foodDropdown"];
-            dataRequest.Zipcode = int.Parse(form["Zipcode"]);
-
             ViewBag.Message = "Results page.";
-            //'price' variable is assigned to 1,2,3,or 4. This value is created by methods in the QueryHelper class
-            int price = QueryHelper.RestaurantPrice(dataRequest.Budget, dataRequest.numPeople);
 
             //New FactualDriver object being created using the variable names previously assigned to keys
-            Factual Factual = new Factual(OATHKEY,OATHSECRET);
-            string data = Factual.Fetch("restaurants", new Query() //The Fetch method parameters require a table name and a new query
-                .Field("price")
-                .Equal(price.ToString()) //'price' field set by 'int price' variable (int is then converted to a string) 
-                .Field("cuisine")
-                .Equal(dataRequest.CuisineType.ToLower()) //'cuisine' field set by 'dataRequest.CuisineType' variable (determined by form dropdown menu)
-                .Field("postcode")
-                .Equal(dataRequest.Zipcode)
+            Factual Factual = new Factual(OATHKEY, OATHSECRET);
+            string data = Factual.Fetch("restaurants", new Query() //The Fetch method parameters require a table name and a new query.
+                .Field("locality")
+                .Equal("Grand Rapids") //'locality' field set to 'Grand Rapids'
+                .Field("region")
+                .Equal("MI") //'region' field set to 'MI'
                 .Offset(0)
                 .Limit(40));
 
@@ -58,7 +46,7 @@ namespace FinalProject_WhatsAPPening.Controllers
                 Restaurant restaurant = new Restaurant(); //Each item in 'restaurants' list is initialized as a new 'restaurant'
                 dynamic restVar = JObject.Parse(gcVar.ToString()); //'restVar' is created and holds the properties of a Resaurant object (these properties are from the Restaurant class: name, address, etc...)
 
-                string tString = System.DateTime.Now.DayOfWeek.ToString().ToLower(); //'tString' variable assigned value based on day of the week
+                string tString = DateTime.Now.DayOfWeek.ToString().ToLower(); //'tString' variable assigned value based on day of the week
                 //Used for finding hours of operation for restaurants for the current day of the week
 
                 if (restVar["hours"] != null)
@@ -69,7 +57,6 @@ namespace FinalProject_WhatsAPPening.Controllers
                     {
                         restaurant.Hours = hours.ToString();
                     }
-                    
                 }
                 //The new Restaurant object named 'restaurant' has its properties assigned values. These values are taken from the 'restVar' variable
                 restaurant.Name = restVar.name;
@@ -89,7 +76,7 @@ namespace FinalProject_WhatsAPPening.Controllers
                 {
                     restaurant.Description.Add(desVar.ToString());
                 }
-                
+
                 restaurants.Add(restaurant); //Now the 'restaurant' is added to the list named 'restaurants' and the foreach loop repeats this process (starting at line 57)
 
             }
@@ -98,25 +85,22 @@ namespace FinalProject_WhatsAPPening.Controllers
             {
                 foreach (var activity in db.Activities)
                 {
-                    if(activity.PricePerPerson != null)
-                    if (double.Parse(activity.PricePerPerson.Substring(1)) <= (dataRequest.Budget * .5 / dataRequest.numPeople))
-                    {
-                        Activity newActivity = new Activity();
-                        newActivity.Category = activity.Category;
-                        newActivity.City = activity.City;
-                        newActivity.DaysOpen = activity.DaysOpen;
-                        newActivity.Id = activity.Id;
-                        newActivity.Link = activity.Link;
-                        newActivity.PhoneNumber = activity.PhoneNumber;
-                        newActivity.PricePerPerson = activity.PricePerPerson;
-                        newActivity.State = activity.State;
-                        newActivity.StreetAddress = activity.StreetAddress;
-                        newActivity.TimesOpen = activity.TimesOpen;
-                        newActivity.Venue = activity.Venue;
-                        newActivity.Zip = activity.Zip;
 
-                        activities.Add(newActivity);
-                    }
+                            Activity newActivity = new Activity();
+                            newActivity.Category = activity.Category;
+                            newActivity.City = activity.City;
+                            newActivity.DaysOpen = activity.DaysOpen;
+                            newActivity.Id = activity.Id;
+                            newActivity.Link = activity.Link;
+                            newActivity.PhoneNumber = activity.PhoneNumber;
+                            newActivity.PricePerPerson = activity.PricePerPerson;
+                            newActivity.State = activity.State;
+                            newActivity.StreetAddress = activity.StreetAddress;
+                            newActivity.TimesOpen = activity.TimesOpen;
+                            newActivity.Venue = activity.Venue;
+                            newActivity.Zip = activity.Zip;
+
+                            activities.Add(newActivity);
                 }
             }
 
@@ -132,13 +116,7 @@ namespace FinalProject_WhatsAPPening.Controllers
             result.RestaurantResult = modelRestaurant;
             result.ActivityResult = modelActivity;
             return View("ResultTemp", result);
-        }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
         }
     }
 }
