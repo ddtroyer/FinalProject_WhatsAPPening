@@ -66,7 +66,11 @@ namespace FinalProject_WhatsAPPening.Controllers
                 {
                     //TODO Format restaurant hours to display correctly
                     var hours = restVar["hours"][tString];
-                    restaurant.Hours = hours.ToString();
+                    if (hours != null)
+                    {
+                        restaurant.Hours = hours.ToString();
+                    }
+                    
                 }
                 //The new Restaurant object named 'restaurant' has its properties assigned values. These values are taken from the 'restVar' variable
                 restaurant.Name = restVar.name;
@@ -94,7 +98,8 @@ namespace FinalProject_WhatsAPPening.Controllers
             {
                 foreach (var activity in db.Activities)
                 {
-                    if (int.Parse(activity.PricePerPerson) <= (dataRequest.Budget * .5 / dataRequest.numPeople))
+                    if(activity.PricePerPerson != null)
+                    if (double.Parse(activity.PricePerPerson.Substring(1)) <= (dataRequest.Budget * .5 / dataRequest.numPeople))
                     {
                         Activity newActivity = new Activity();
                         newActivity.Category = activity.Category;
