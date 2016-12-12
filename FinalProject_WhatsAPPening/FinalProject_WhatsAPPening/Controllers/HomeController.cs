@@ -28,9 +28,10 @@ namespace FinalProject_WhatsAPPening.Controllers
         {
             //Variables assigned values based on user values entered in the form (# of people, Budget, and Cuisine Type)
             Request dataRequest = new Request();
+            dataRequest.numPeople = int.Parse(form["Number"]);
             dataRequest.Budget = int.Parse(form["Budget"]);
             dataRequest.CuisineType = form["foodDropdown"];
-            dataRequest.numPeople = int.Parse(form["Number"]);
+            dataRequest.Zipcode = int.Parse(form["Zipcode"]);
 
             ViewBag.Message = "Results page.";
             //'price' variable is assigned to 1,2,3,or 4. This value is created by methods in the QueryHelper class
@@ -39,14 +40,16 @@ namespace FinalProject_WhatsAPPening.Controllers
             //New FactualDriver object being created using the variable names previously assigned to keys
             Factual Factual = new Factual(OATHKEY,OATHSECRET);
             string data = Factual.Fetch("restaurants", new Query() //The Fetch method parameters require a table name and a new query.
-                .Field("locality")
-                .Equal("Grand Rapids") //'locality' field set to 'Grand Rapids'
-                .Field("region")
-                .Equal("MI") //'region' field set to 'MI'
+                //.Field("locality")
+                //.Equal("Grand Rapids") //'locality' field set to 'Grand Rapids'
+                //.Field("region")
+                //.Equal("MI") //'region' field set to 'MI'
                 .Field("price")
                 .Equal(price.ToString()) //'price' field set by 'int price' variable (int is then converted to a string) 
                 .Field("cuisine")
                 .Equal(dataRequest.CuisineType.ToLower()) //'cuisine' field set by 'dataRequest.CuisineType' variable (determined by form dropdown menu)
+                .Field("zipcode")
+                .Equal(dataRequest.Zipcode)
                 .Offset(0)
                 .Limit(40));
 
