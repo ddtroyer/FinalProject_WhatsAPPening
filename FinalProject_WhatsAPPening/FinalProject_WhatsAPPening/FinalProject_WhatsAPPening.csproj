@@ -304,6 +304,7 @@
     <Content Include="Views\Home\Activity.cshtml" />
     <Content Include="Views\Home\ResultTemp.cshtml" />
     <Content Include="Views\ManageActivity\AddActivityView.cshtml" />
+    <Content Include="Views\Shared\ResultTemp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

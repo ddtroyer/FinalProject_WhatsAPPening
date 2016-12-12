@@ -1,0 +1,34 @@
+﻿
+@model FinalProject_WhatsAPPening.Models.ResultViewModel
+
+@{
+    ViewBag.Title = "ResultTemp";
+}
+
+<h1>Results!</h1>
+
+
+    <font size="5">
+        What to do:
+        <a href="@Model.ActivityResult.Link" target="_blank">
+            @Model.ActivityResult.Venue</a> located at @Model.ActivityResult.StreetAddress , @Model.ActivityResult.City
+
+        <p>Price per person: $@Model.ActivityResult.PricePerPerson</p>
+
+        <br />
+
+        Where to Eat:
+        <a href="@Model.RestaurantResult.Website" target="_blank">
+             @Model.RestaurantResult.Name</a> located at @Model.RestaurantResult.Address 
+        <p>Price per person: @Model.RestaurantResult.PriceRange</p>
+
+    </font>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal"></dl>
+</div>
+<p>
+
+    @Html.ActionLink("Try Again", "Index")
+</p>
