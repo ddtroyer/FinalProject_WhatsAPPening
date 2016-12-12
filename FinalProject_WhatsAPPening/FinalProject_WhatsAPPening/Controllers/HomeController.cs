@@ -26,7 +26,7 @@ namespace FinalProject_WhatsAPPening.Controllers
         [HttpPost]
         public ActionResult Index(FormCollection form)
         {
-            //variables assigned values based on user values entered in the form (# of people, Budget, and Cuisine Type)
+            //Variables assigned values based on user values entered in the form (# of people, Budget, and Cuisine Type)
             Request dataRequest = new Request();
             dataRequest.Budget = int.Parse(form["Budget"]);
             dataRequest.CuisineType = form["foodDropdown"];
@@ -52,7 +52,7 @@ namespace FinalProject_WhatsAPPening.Controllers
 
             var jData = JObject.Parse(data); //'data' is being Parsed from string to JObject type
 
-            List<Restaurant> restaurants = new List<Restaurant>(); //initializing a new list of resaurants
+            List<Restaurant> restaurants = new List<Restaurant>(); //Initializing a new list of resaurants
 
             foreach (var gcVar in jData["response"]["data"].ToList())
             {
@@ -85,7 +85,7 @@ namespace FinalProject_WhatsAPPening.Controllers
                     restaurant.CuisineTypes.Add(cuisineVar.ToString()); //The foreach loop iterates through the multiple types and adds them to the 'restaurant.CuisineTypes' list
                 }
 
-                restaurant.Description = new List<string>(); //Like the cuisine types list and foreach loop, but for restaurant description
+                restaurant.Description = new List<string>(); //Just like the CuisineTypes list foreach loop, but for restaurant description
                 foreach (var desVar in restVar.category_labels)
                 {
                     restaurant.Description.Add(desVar.ToString());
