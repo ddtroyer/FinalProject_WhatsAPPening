@@ -1,10 +1,10 @@
 ﻿@model FinalProject_WhatsAPPening.Activity
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Activity</h4>
         <hr />
@@ -22,9 +22,9 @@
             <div class="col-md-offset-2 col-md-10">
                 <button onclick="AddVenue()">Add Venue</button>
                 <script>
-function AddVenue() {
-    alert("Venue was successfully added!");
-}
+                    function AddVenue() {
+                        alert("Successfully added!");
+                    }
                 </script>
             </div>
         </div>

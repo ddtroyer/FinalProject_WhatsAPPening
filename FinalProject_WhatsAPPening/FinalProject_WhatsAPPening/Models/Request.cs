@@ -8,7 +8,7 @@ using System.Web;
 namespace FinalProject_WhatsAPPening.Models
 {
     public class Request
-    {   //This class represents the requst form
+    {   //This class represents the reqeust form
         [DisplayName("Number of People")]
         [Required(ErrorMessage = "Please Enter the Number of People")]
         [Range(1, 10, ErrorMessage = "Number must be between 1 and 10")]
@@ -24,7 +24,11 @@ namespace FinalProject_WhatsAPPening.Models
 
         [DisplayName("Number of People")]
         public int numPeople { get; set; }
-        //public int ZipCode { get; set; }      
+        //public int ZipCode { get; set; }     
+
+        [DisplayName("Zipcode")]
+        [Required(ErrorMessage = "Please Enter Your Zipcode")]
+        public int Zipcode { get; set; }
 
     }
 }
