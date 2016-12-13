@@ -40,9 +40,10 @@ namespace FinalProject_WhatsAPPening.Controllers
         {
             //Variables assigned values based on user values entered in the form (# of people, Budget, and Cuisine Type)
             Request dataRequest = new Request();
+            ResultViewModel result = new ResultViewModel();
             dataRequest.numPeople = int.Parse(form["numPeople"]);
             dataRequest.Budget = int.Parse(form["Budget"]);
-            dataRequest.CuisineType = form["foodDropdown"];
+            dataRequest.CuisineType = form["categoryDropdown"];
             dataRequest.Zipcode = form["Zipcode"];
 
             ViewBag.Message = "Results page.";
@@ -60,7 +61,7 @@ namespace FinalProject_WhatsAPPening.Controllers
                    .Field("cuisine")
                    .Equal(dataRequest.CuisineType.ToLower()) //'cuisine' field set by 'dataRequest.CuisineType' variable (determined by form dropdown menu)
                    .Field("postcode")
-                   .Equal(int.Parse(dataRequest.Zipcode))
+                   .Equal(dataRequest.Zipcode)
                    .Offset(0)
                    .Limit(40));
             }
