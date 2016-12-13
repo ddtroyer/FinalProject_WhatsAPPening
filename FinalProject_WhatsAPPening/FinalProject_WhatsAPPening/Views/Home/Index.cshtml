@@ -22,9 +22,6 @@
             </div>
         </div>
 
-
-        
-
         @*Budget*@
         <div class="form-group" > 
             @Html.LabelFor(model => model.Budget, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -36,9 +33,9 @@
 
         @*Cuisine Type*@
         <div class="form-group">
-            <label class="control-label col-md-2" for="foodDropdown">Cuisine</label>
+            <label class="control-label col-md-2" for="categoryDropdown">Category</label>
             <div class="col-md-10">
-                <select class="form-control" name="foodDropdown" id="foodDropdown">
+                <select class="form-control" name="categoryDropdown" id="categoryDropdown">
                     <option value="american" selected>American</option>
                     <option value="italian">Italian</option>
                     <option value="seafood">Seafood</option>
@@ -47,7 +44,7 @@
                     <option value="southern">Southern</option>
                     <option value="asian">Asian</option>
                 </select>
-                <span class="field-validation-valid text-danger" data-valmsg-for="CuisineType" data-valmsg-replace="true"></span>
+                <span class="field-validation-valid text-danger" data-valmsg-for="Category" data-valmsg-replace="true"></span>
             </div>
         </div>
 
@@ -59,7 +56,6 @@
                 @Html.ValidationMessageFor(model => model.Zipcode, "", new { @class = "text-danger" })
             </div>
         </div>
-       
 
         @*Go! button*@
         <div class="form-group">
@@ -68,15 +64,13 @@
             </div>
         </div>
 
+
         @*Random button*@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="button" value="No strings? Click here!" class="btn btn-default" onclick="location.href='@Url.Action("Random","Random")'"/> @*style="display: block; margin: 0 auto;"*@
             </div>
         </div>
-
-
-
 
 
     </div>

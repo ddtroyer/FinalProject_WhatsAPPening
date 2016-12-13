@@ -13,21 +13,20 @@ namespace FinalProject_WhatsAPPening.Models
         [Required(ErrorMessage = "Please Enter the Number of People")]
         [Range(1, 10, ErrorMessage = "Number must be between 1 and 10")]
         public int Number { get; set; }
+        public int numPeople { get; set; }
 
         [DisplayName("Budget")]
-        [Required(ErrorMessage = "Please Enter A Budget")]
+        [Required(ErrorMessage = "Please enter a budget.")]
         public int Budget { get; set; }
 
         [DisplayName("Cuisine Type")]
-        [Required(ErrorMessage = "Please select a Cuisine Type")]
+        [Required(ErrorMessage = "Please select a cuisine type.")]
         public string CuisineType { get; set; }
 
-        [DisplayName("Number of People")]
-        public int numPeople { get; set; }
-        //public int ZipCode { get; set; }     
+        //[DisplayName("Number of People")]             
 
         [DisplayName("Zipcode")]
-        [Required(ErrorMessage = "Please Enter Your Zipcode")]
+        [Required(ErrorMessage = "Please enter your zipcode.")]
         public int Zipcode { get; set; }
 
     }
