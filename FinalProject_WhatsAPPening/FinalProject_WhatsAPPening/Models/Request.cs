@@ -27,8 +27,7 @@ namespace FinalProject_WhatsAPPening.Models
         //public int ZipCode { get; set; }     
 
         [DisplayName("Zipcode")]
-        [Required(ErrorMessage = "Please Enter Your Zipcode")]
-        public int Zipcode { get; set; }
-
+        [RegularExpression(@"^\d{5}?$", ErrorMessage = "Invalid Zip Code")]
+        public string Zipcode { get; set; }
     }
 }
