@@ -28,7 +28,7 @@ namespace FinalProject_WhatsAPPening.Controllers
         {
             //Variables assigned values based on user values entered in the form (# of people, Budget, and Cuisine Type)
             Request dataRequest = new Request();
-            dataRequest.numPeople = int.Parse(form["Number"]);
+            dataRequest.numPeople = int.Parse(form["numPeople"]);
             dataRequest.Budget = int.Parse(form["Budget"]);
             dataRequest.CuisineType = form["foodDropdown"];
             dataRequest.Zipcode = form["Zipcode"];
@@ -39,7 +39,7 @@ namespace FinalProject_WhatsAPPening.Controllers
 
             //New FactualDriver object being created using the variable names previously assigned to keys
             Factual Factual = new Factual(OATHKEY, OATHSECRET);
-            string data;
+            string data = null;
             try
             {
                 data = Factual.Fetch("restaurants", new Query() //The Fetch method parameters require a table name and a new query
@@ -62,7 +62,7 @@ namespace FinalProject_WhatsAPPening.Controllers
             List<Restaurant> restaurants = new List<Restaurant>(); //Initializing a new list of resaurants
             Restaurant restaurant = new Restaurant(); //Each item in 'restaurants' list is initialized as a new 'restaurant'
 
-            if (jData["Error"] != null)
+            if (jData["Error"] == null)
             {
                 foreach (var gcVar in jData["response"]["data"].ToList())
                 {
