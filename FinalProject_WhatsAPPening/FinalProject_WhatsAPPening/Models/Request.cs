@@ -22,6 +22,10 @@ namespace FinalProject_WhatsAPPening.Models
         [Required(ErrorMessage = "Please select a Cuisine Type")]
         public string CuisineType { get; set; }
 
+        [DisplayName("Activity Category")]
+        [Required(ErrorMessage = "Please select an Activity Category.")]
+        public string Category { get; set; }
+
         [DisplayName("Zipcode")]
         [RegularExpression(@"^\d{5}?$", ErrorMessage = "Invalid Zip Code")]
         public string Zipcode { get; set; }
