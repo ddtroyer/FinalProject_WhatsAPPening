@@ -176,6 +176,7 @@ namespace FinalProject_WhatsAPPening.Controllers
 
             Random rnd = new Random();
 
+            result.Restuarants = restaurants;
             if (restaurants.Count > 0)
             {
                 int restInt = rnd.Next(0, restaurants.Count());
@@ -189,6 +190,7 @@ namespace FinalProject_WhatsAPPening.Controllers
                 };
             }
 
+            result.Activities = activities;
             if (activities.Count > 0)
             {
                 int actInt = rnd.Next(0, activities.Count());
