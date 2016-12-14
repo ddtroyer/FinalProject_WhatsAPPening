@@ -199,7 +199,7 @@ namespace FinalProject_WhatsAPPening.Controllers
                 result.ActivityResult = new Activity()
                 {
                     Venue = "No Activity Found",
-                    PricePerPerson = "$0.00"
+                    PricePerPerson = "0.00"
                 };
 
             }
@@ -220,6 +220,7 @@ namespace FinalProject_WhatsAPPening.Controllers
             JObject response = PerformRequest(QueryURL);
             List<Activity> activities = new List<Activity>();
 
+           if (response["_embedded"]!= null)
             foreach (var activity in response["_embedded"]["events"].ToList())
             {
 
