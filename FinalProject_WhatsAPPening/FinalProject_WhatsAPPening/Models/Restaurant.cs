@@ -41,9 +41,10 @@ namespace FinalProject_WhatsAPPening.Models
 
     public enum PriceRange
     {
-        Cheap,
+        Cheap = 1,
         Moderate,
         High,
-        Expensive
+        Expensive,
+        VeryExpensive
     }
 }

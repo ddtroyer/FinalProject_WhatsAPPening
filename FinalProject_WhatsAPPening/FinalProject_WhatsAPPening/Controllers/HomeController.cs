@@ -46,7 +46,7 @@ namespace FinalProject_WhatsAPPening.Controllers
 
 
             //'price' variable is assigned to 1,2,3,or 4. This value is created by methods in the QueryHelper class
-            int price = QueryHelper.RestaurantPrice(dataRequest.Budget, dataRequest.numPeople);
+            string price = QueryHelper.RestaurantPrice(dataRequest.Budget, dataRequest.numPeople);
 
             //New FactualDriver object being created using the variable names previously assigned to keys
             Factual Factual = new Factual(OATHKEY, OATHSECRET);
@@ -56,15 +56,14 @@ namespace FinalProject_WhatsAPPening.Controllers
                 data = Factual.Fetch("restaurants",
                     new Query() //The Fetch method parameters require a table name and a new query
                         .Field("price")
-                        .Equal(price.ToString())
+                        .Equal(price)
                         //'price' field set by 'int price' variable (int is then converted to a string) 
                         .Field("cuisine")
                         .Equal(dataRequest.CuisineType.ToLower())
-                        //'cuisine' field set by 'dataRequest.CuisineType' variable (determined by form dropdown menu)
                         .Field("postcode")
                         .Equal(dataRequest.Zipcode)
                         .Offset(0)
-                        .Limit(40));
+                        .Limit(20));
             }
             catch
             {
@@ -163,7 +162,12 @@ namespace FinalProject_WhatsAPPening.Controllers
                                 newActivity.Venue = activity.Venue;
                                 newActivity.Zip = activity.Zip;
 
-                                activities.Add(newActivity);
+
+                                if (decimal.Parse(newActivity.PricePerPerson) <= ((dataRequest.Budget/2)/dataRequest.numPeople))
+                                {
+                                    activities.Add(newActivity);
+                                }
+                                
                             }
                     }
                 }
@@ -311,6 +315,7 @@ namespace FinalProject_WhatsAPPening.Controllers
 
                     }
 
+                    
                     activities.Add(newActivity);
                 }
 
