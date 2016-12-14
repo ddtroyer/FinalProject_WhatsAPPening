@@ -135,9 +135,8 @@ namespace FinalProject_WhatsAPPening.Controllers
             string zipcode = form["Zipcode"];
             string qString = TMQueryString(zipcode, "10");
 
-            List<Activity> tempActivity =
-                ActivitiesRequest(
-                    @"https://app.ticketmaster.com/discovery/v2/events.json?city=Grand%20Rapids&state=MI&countryCode=US&startDateTime=2016-12-13T00:00:00Z&apikey=oIsA0vq6NW2LaHLqAg6ySW7LZKblGGHT");
+            List<Activity> tempActivity = ActivitiesRequest(qString);
+                
 
             foreach (Activity activity in tempActivity)
             {
@@ -324,7 +323,7 @@ namespace FinalProject_WhatsAPPening.Controllers
             StringBuilder returnString = new StringBuilder();
             returnString.Append(TMBaseURL);
             returnString.Append("startDateTime=");
-            returnString.Append(today + "&");
+            returnString.Append(today + "Z&");
             returnString.Append("postalCode=");
             returnString.Append(postalCode + "&");
             returnString.Append("radius=");
