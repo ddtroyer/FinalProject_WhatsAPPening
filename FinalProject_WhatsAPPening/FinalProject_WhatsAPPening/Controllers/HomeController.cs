@@ -37,13 +37,13 @@ namespace FinalProject_WhatsAPPening.Controllers
             ViewBag.Message = "Results page.";
             //Variables assigned values based on user values entered in the form (# of people, Budget, and Cuisine Type)
             Request dataRequest = new Request();
-            
+
             dataRequest.numPeople = int.Parse(form["numPeople"]);
             dataRequest.Budget = int.Parse(form["Budget"]);
             dataRequest.CuisineType = form["categoryDropdown"];
             dataRequest.Zipcode = form["Zipcode"];
 
-            
+
             //'price' variable is assigned to 1,2,3,or 4. This value is created by methods in the QueryHelper class
             int price = QueryHelper.RestaurantPrice(dataRequest.Budget, dataRequest.numPeople);
 
@@ -82,7 +82,7 @@ namespace FinalProject_WhatsAPPening.Controllers
                     Restaurant restaurant = new Restaurant();
                     dynamic restVar = JObject.Parse(gcVar.ToString());
                     //'restVar' is created and holds the properties of a Resaurant object (these properties are from the Restaurant class: name, address, etc...)
-            
+
                     //'timeString' variable assigned value based on day of the week
                     //Used for finding hours of operation for restaurants for the current day of the week
 
@@ -98,7 +98,7 @@ namespace FinalProject_WhatsAPPening.Controllers
                     }
                     //The new Restaurant object named 'restaurant' has its properties assigned values. These values are taken from the 'restVar' variable
                     restaurant.Name = restVar.name;
-                    restaurant.PriceRange = (PriceRange) restVar.price;
+                    restaurant.PriceRange = (PriceRange)restVar.price;
                     //'PriceRange' is an enum found in the Restaurant class
                     restaurant.Address = restVar.address;
                     restaurant.ZipCode = restVar.postcode;
@@ -118,7 +118,7 @@ namespace FinalProject_WhatsAPPening.Controllers
                     {
                         restaurant.Description.Add(desVar.ToString());
                     }
-    
+
                     restaurant.Id = restaurants.Count;
                     restaurants.Add(restaurant);
                     //Now the 'restaurant' is added to the list named 'restaurants' and the foreach loop repeats this process (starting at line 57)
@@ -131,7 +131,7 @@ namespace FinalProject_WhatsAPPening.Controllers
 
             List<Activity> activities = new List<Activity>();
             List<Activity> tempActivity = ActivitiesRequest(qString);
-                
+
 
             foreach (Activity activity in tempActivity)
             {
@@ -146,7 +146,7 @@ namespace FinalProject_WhatsAPPening.Controllers
                     {
                         if (activity.PricePerPerson != null)
                             if (double.Parse(activity.PricePerPerson) <=
-                                (dataRequest.Budget*.5/dataRequest.numPeople))
+                                (dataRequest.Budget * .5 / dataRequest.numPeople))
                             {
                                 Activity newActivity = new Activity();
 
@@ -167,7 +167,7 @@ namespace FinalProject_WhatsAPPening.Controllers
                             }
                     }
                 }
- 
+
             }
 
 
@@ -178,7 +178,7 @@ namespace FinalProject_WhatsAPPening.Controllers
 
             result.Activities = activities;
             result.SetRandomActivity();
-            
+
 
             return View("ResultTemp", result);
         }
@@ -205,105 +205,114 @@ namespace FinalProject_WhatsAPPening.Controllers
             JObject response = PerformRequest(QueryURL);
             List<Activity> activities = new List<Activity>();
 
-           if (response["_embedded"]!= null)
-            foreach (var activity in response["_embedded"]["events"].ToList())
-            {
-
-
-
-
-                dynamic activityDyn = JObject.Parse(activity.ToString());
-                Activity newActivity = new Activity();
-
-                newActivity.Venue = activityDyn.name;
-                newActivity.Link = activityDyn.url;
-                if (activityDyn["dates"]["start"]["localTime"] != null)
+            if (response["_embedded"] != null)
+                foreach (var activity in response["_embedded"]["events"].ToList())
                 {
-                    string dateTime = activityDyn["dates"]["start"]["localTime"];
-                    DateTime hoursOpen = DateTime.Parse(dateTime);
-                    newActivity.TimesOpen = hoursOpen.ToString("h:mm tt");
-                }
-
-                if (activityDyn["classifications"] != null)
-                {
-                    dynamic classifications = activityDyn["classifications"];
-                    dynamic genre = classifications[0]["genre"];
-                    dynamic segment = classifications[0]["segment"];
-
-                    string segName = null;
-                    string genreName = null;
 
 
-                    if (segment != null)
-                    segName = segment.name;
 
-                    if(genre != null)
-                    genreName = genre.name;
 
-                    if (!String.IsNullOrWhiteSpace(segName))
+                    dynamic activityDyn = JObject.Parse(activity.ToString());
+                    Activity newActivity = new Activity();
+
+                    newActivity.Venue = activityDyn.name;
+                    newActivity.Link = activityDyn.url;
+                    if (activityDyn["dates"]["start"]["localTime"] != null)
                     {
-                        newActivity.Category = segName + " - " + genreName;
-                    }
-                    else
-                    {
-                        newActivity.Category = genreName;
+                        string dateTime = activityDyn["dates"]["start"]["localTime"];
+                        DateTime hoursOpen = DateTime.Parse(dateTime);
+                        newActivity.TimesOpen = hoursOpen.ToString("h:mm tt");
                     }
 
-                }
-                if (activityDyn["images"] != null)
-                {
-                    dynamic images = activityDyn["images"];
-                    for (int i = 0; i <images.Count - 1; i++)
+                    if (activityDyn["classifications"] != null)
                     {
-                        string url = images[i]["url"];
-                        if (url.Contains("LARGE"))
+                        dynamic classifications = activityDyn["classifications"];
+                        dynamic genre = classifications[0]["genre"];
+                        dynamic segment = classifications[0]["segment"];
+
+                        string segName = null;
+                        string genreName = null;
+
+
+                        if (segment != null)
+                            segName = segment.name;
+
+                        if (genre != null)
+                            genreName = genre.name;
+
+                        if (!String.IsNullOrWhiteSpace(segName))
                         {
-                          newActivity.ImageUrlLarge = images[i]["url"];
-                          break;
+                            newActivity.Category = segName + " - " + genreName;
                         }
-                    }
-
-                    for (int i = 0; i <images.Count - 1; i++)
-                    {
-                        string url = images[i]["url"];
-                        if (url.Contains("CUSTOM"))
+                        else
                         {
-                          newActivity.ImageUrl = images[i]["url"];
-                          break;
+                            newActivity.Category = genreName;
                         }
+
                     }
-                    
-                }
-                if (activityDyn["priceRanges"] != null)
-                {
-                    dynamic priceRange = activityDyn["priceRanges"];
-                    decimal min = priceRange[0].min;
-                    decimal max = priceRange[0].max;
-                    decimal avg = ((min + max) / 2);
-                    newActivity.PricePerPerson = avg.ToString();
-
-                }
-
-                if (activityDyn["_embedded"]["venues"] != null)
-                {
-                    dynamic venues = activityDyn["_embedded"]["venues"];
-                    newActivity.Venue += " at " + venues[0].name;
-                    newActivity.Zip = venues[0].postalCode;
-                    newActivity.City = venues[0]["city"]["name"];
-                    newActivity.State = venues[0]["state"]["stateCode"];
-                    newActivity.StreetAddress = venues[0]["address"]["line1"];
-
-                    if (venues[0]["boxOfficeInfo"] != null)
+                    if (activityDyn["images"] != null)
                     {
-                        dynamic boxOffice = venues[0]["boxOfficeInfo"];
-                        string phoneNumber = boxOffice.phoneNumberDetail;
-                        newActivity.PhoneNumber = phoneNumber.Substring(phoneNumber.Length - 14);
+                        dynamic images = activityDyn["images"];
+                        for (int i = 0; i < images.Count - 1; i++)
+                        {
+                            string url = images[i]["url"];
+                            if (url.Contains("LARGE"))
+                            {
+                                newActivity.ImageUrlLarge = images[i]["url"];
+                                break;
+                            }
+                        }
+
+                        for (int i = 0; i < images.Count - 1; i++)
+                        {
+                            string url = images[i]["url"];
+                            if (url.Contains("CUSTOM"))
+                            {
+                                newActivity.ImageUrl = images[i]["url"];
+                                break;
+                            }
+                        }
+
+                    }
+                    if (activityDyn["priceRanges"] != null)
+                    {
+                        dynamic priceRange = activityDyn["priceRanges"];
+                        decimal min = priceRange[0].min;
+                        decimal max = priceRange[0].max;
+                        decimal avg = ((min + max) / 2);
+                        newActivity.PricePerPerson = avg.ToString();
+
                     }
 
-                }
+                    if (activityDyn["_embedded"]["venues"] != null)
+                    {
+                        dynamic venues = activityDyn["_embedded"]["venues"];
+                        newActivity.Venue += " at " + venues[0].name;
+                        newActivity.Zip = venues[0].postalCode;
+                        newActivity.City = venues[0]["city"]["name"];
+                        newActivity.State = venues[0]["state"]["stateCode"];
+                        newActivity.StreetAddress = venues[0]["address"]["line1"];
 
-                activities.Add(newActivity);
-            }
+                        if (venues[0]["boxOfficeInfo"] != null)
+                        {
+                            dynamic boxOffice = venues[0]["boxOfficeInfo"];
+                            string phoneNumber = boxOffice.phoneNumberDetail;
+
+                            if (phoneNumber.Length >= 14)
+                            {
+                                newActivity.PhoneNumber = phoneNumber.Substring(phoneNumber.Length - 14);
+                            }
+                            else
+                            {
+                                newActivity.PhoneNumber = phoneNumber;
+                            }
+
+                        }
+
+                    }
+
+                    activities.Add(newActivity);
+                }
 
             return activities;
         }
@@ -315,11 +324,11 @@ namespace FinalProject_WhatsAPPening.Controllers
             request.Method = "GET";
             request.Credentials = CredentialCache.DefaultCredentials;
 
-            ((HttpWebRequest) request).Accept =
+            ((HttpWebRequest)request).Accept =
                 @"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
-            ((HttpWebRequest) request).UserAgent =
+            ((HttpWebRequest)request).UserAgent =
                 "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36";
-            HttpWebResponse response = (HttpWebResponse) request.GetResponse();
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
             var stream = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
 
