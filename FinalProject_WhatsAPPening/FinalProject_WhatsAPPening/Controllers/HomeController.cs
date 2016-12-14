@@ -34,15 +34,16 @@ namespace FinalProject_WhatsAPPening.Controllers
         [HttpPost]
         public ActionResult Index(FormCollection form)
         {
+            ViewBag.Message = "Results page.";
             //Variables assigned values based on user values entered in the form (# of people, Budget, and Cuisine Type)
             Request dataRequest = new Request();
-            ResultViewModel result = new ResultViewModel();
+            
             dataRequest.numPeople = int.Parse(form["numPeople"]);
             dataRequest.Budget = int.Parse(form["Budget"]);
             dataRequest.CuisineType = form["categoryDropdown"];
             dataRequest.Zipcode = form["Zipcode"];
 
-            ViewBag.Message = "Results page.";
+            
             //'price' variable is assigned to 1,2,3,or 4. This value is created by methods in the QueryHelper class
             int price = QueryHelper.RestaurantPrice(dataRequest.Budget, dataRequest.numPeople);
 
@@ -81,20 +82,19 @@ namespace FinalProject_WhatsAPPening.Controllers
                     Restaurant restaurant = new Restaurant();
                     dynamic restVar = JObject.Parse(gcVar.ToString());
                     //'restVar' is created and holds the properties of a Resaurant object (these properties are from the Restaurant class: name, address, etc...)
-
-                    string tString = System.DateTime.Now.DayOfWeek.ToString().ToLower();
-                    //'tString' variable assigned value based on day of the week
+            
+                    //'timeString' variable assigned value based on day of the week
                     //Used for finding hours of operation for restaurants for the current day of the week
+
+                    string timeString = System.DateTime.Now.DayOfWeek.ToString().ToLower();
 
                     if (restVar["hours"] != null)
                     {
-                        //TODO Format restaurant hours to display correctly
-                        var hours = restVar["hours"][tString];
+                        var hours = restVar["hours"][timeString];
                         if (hours != null)
                         {
                             restaurant.Hours = hours.ToString();
                         }
-
                     }
                     //The new Restaurant object named 'restaurant' has its properties assigned values. These values are taken from the 'restVar' variable
                     restaurant.Name = restVar.name;
@@ -118,19 +118,18 @@ namespace FinalProject_WhatsAPPening.Controllers
                     {
                         restaurant.Description.Add(desVar.ToString());
                     }
-
+    
+                    restaurant.Id = restaurants.Count;
                     restaurants.Add(restaurant);
                     //Now the 'restaurant' is added to the list named 'restaurants' and the foreach loop repeats this process (starting at line 57)
 
                 }
             }
 
-
-            List<Activity> activities = new List<Activity>();
-
             string zipcode = form["Zipcode"];
             string qString = TMQueryString(zipcode, "10");
 
+            List<Activity> activities = new List<Activity>();
             List<Activity> tempActivity = ActivitiesRequest(qString);
                 
 
@@ -150,6 +149,7 @@ namespace FinalProject_WhatsAPPening.Controllers
                                 (dataRequest.Budget*.5/dataRequest.numPeople))
                             {
                                 Activity newActivity = new Activity();
+
                                 newActivity.Category = activity.Category;
                                 newActivity.City = activity.City;
                                 newActivity.DaysOpen = activity.DaysOpen;
@@ -170,37 +170,16 @@ namespace FinalProject_WhatsAPPening.Controllers
  
             }
 
-            Random rnd = new Random();
+
+            ResultViewModel result = new ResultViewModel();
 
             result.Restuarants = restaurants;
-            if (restaurants.Count > 0)
-            {
-                int restInt = rnd.Next(0, restaurants.Count());
-                result.RestaurantResult = restaurants[restInt];
-            }
-            else
-            {
-                result.RestaurantResult = new Restaurant()
-                {
-                    Name = "No Restaurant Found"
-                };
-            }
+            result.SetRandomRestaurant();
 
             result.Activities = activities;
-            if (activities.Count > 0)
-            {
-                int actInt = rnd.Next(0, activities.Count());
-                result.ActivityResult = activities[actInt];
-            }
-            else
-            {
-                result.ActivityResult = new Activity()
-                {
-                    Venue = "No Activity Found",
-                    PricePerPerson = "0.00"
-                };
+            result.SetRandomActivity();
+            
 
-            }
             return View("ResultTemp", result);
         }
 
@@ -271,7 +250,30 @@ namespace FinalProject_WhatsAPPening.Controllers
                     }
 
                 }
+                if (activityDyn["images"] != null)
+                {
+                    dynamic images = activityDyn["images"];
+                    for (int i = 0; i <images.Count - 1; i++)
+                    {
+                        string url = images[i]["url"];
+                        if (url.Contains("LARGE"))
+                        {
+                          newActivity.ImageUrlLarge = images[i]["url"];
+                          break;
+                        }
+                    }
 
+                    for (int i = 0; i <images.Count - 1; i++)
+                    {
+                        string url = images[i]["url"];
+                        if (url.Contains("CUSTOM"))
+                        {
+                          newActivity.ImageUrl = images[i]["url"];
+                          break;
+                        }
+                    }
+                    
+                }
                 if (activityDyn["priceRanges"] != null)
                 {
                     dynamic priceRange = activityDyn["priceRanges"];
@@ -348,6 +350,26 @@ namespace FinalProject_WhatsAPPening.Controllers
 
             return returnString.ToString();
 
+        }
+
+        [HttpPost]
+        public ActionResult GetAnotherActivity(FormCollection form)
+        {
+
+            ResultViewModel Rvs = new ResultViewModel();
+            Rvs = (ResultViewModel)Session["RvModel"];
+            //int ActivityID = int.Parse(form["ActivityID"]);
+            //int RestuarantID = int.Parse(form["RestaurantID"]);
+
+            if (form["ButtonClicked"] == "R")
+            {
+                Rvs.SetRandomRestaurant();
+            }
+            else
+            {
+                Rvs.SetRandomActivity();
+            }
+            return View("ResultTemp", Rvs);
         }
 
     }
