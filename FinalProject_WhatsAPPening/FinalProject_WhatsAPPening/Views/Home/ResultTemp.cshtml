@@ -1,8 +1,15 @@
-﻿@model FinalProject_WhatsAPPening.Models.ResultViewModel
+﻿
+@using System
+@using FinalProject_WhatsAPPening.Models;
+@using FinalProject_WhatsAPPening;
+
+@model FinalProject_WhatsAPPening.Models.ResultViewModel
 
 @{
     ViewBag.Title = "ResultTemp";
 }
+
+
 
 <h1>Results!</h1>
 
@@ -11,8 +18,9 @@
         What to do:
         <a href="@Model.ActivityResult.Link" target="_blank">
             @Model.ActivityResult.Venue</a> located at @Model.ActivityResult.StreetAddress , @Model.ActivityResult.City
-
+         
         <p>Price per person: $@Model.ActivityResult.PricePerPerson</p>
+        <p><input type="submit" value="Random Activity" class="btn btn-default " onclick="location.href='@Url.Action("RandomActivity","Random",new {model = Model})'" /></p>
 
         <br />
 
@@ -31,3 +39,4 @@
 
     @Html.ActionLink("Try Again", "Index")
 </p>
+

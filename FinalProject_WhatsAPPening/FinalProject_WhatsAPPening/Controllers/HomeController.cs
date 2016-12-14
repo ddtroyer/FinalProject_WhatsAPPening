@@ -9,14 +9,10 @@ using System.Web.Mvc;
 using FinalProject_WhatsAPPening.Models;
 using FactualDriver;
 using Newtonsoft.Json.Linq;
-using System;
 using YelpAPI;
-using System.Net;
 using System.Security.Cryptography.Xml;
-using System.Text;
-using Newtonsoft.Json.Linq;
 using SimpleOAuth;
-using FinalProject_WhatsAPPening.Models;
+
 
 namespace FinalProject_WhatsAPPening.Controllers
 {
@@ -246,8 +242,16 @@ namespace FinalProject_WhatsAPPening.Controllers
                     dynamic classifications = activityDyn["classifications"];
                     dynamic genre = classifications[0]["genre"];
                     dynamic segment = classifications[0]["segment"];
-                    string segName = segment.name;
-                    string genreName = genre.name;
+
+                    string segName = null;
+                    string genreName = null;
+
+
+                    if (segment != null)
+                    segName = segment.name;
+
+                    if(genre != null)
+                    genreName = genre.name;
 
                     if (!String.IsNullOrWhiteSpace(segName))
                     {

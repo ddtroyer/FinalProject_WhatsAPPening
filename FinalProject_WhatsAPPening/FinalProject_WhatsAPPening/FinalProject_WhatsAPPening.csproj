@@ -214,6 +214,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ManageActivityController.cs" />
+    <Compile Include="Controllers\RandomController.cs" />
     <Compile Include="Controllers\TicketmasterController.cs" />
     <Compile Include="Models\Activity.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -307,6 +308,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Random\" />
     <Folder Include="Views\Ticketmaster\" />
   </ItemGroup>
   <ItemGroup>
