@@ -141,11 +141,10 @@ namespace FinalProject_WhatsAPPening.Controllers
 
             if (zipcode.Substring(0, 3) == "495")
             {
-                using (DBActivity db = new DBActivity())
-                {
+                using (DBActivity db = new DBActivity())                {
                     foreach (var activity in db.Activities)
                     {
-                        if (activity.PricePerPerson != null)
+                        if (activity.DaysOpen != null)
                             if (double.Parse(activity.PricePerPerson) <=
                                 (dataRequest.Budget * .5 / dataRequest.numPeople))
                             {
