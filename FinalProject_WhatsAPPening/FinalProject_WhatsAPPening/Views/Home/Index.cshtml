@@ -22,31 +22,39 @@
         </div>
     </div>
 
-    @*Budget*@
-    <div class="form-group">
-        @Html.LabelFor(model => model.Budget, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Budget, new { htmlAttributes = new { @class = "form-control", @min = "0" } })
-            @Html.ValidationMessageFor(model => model.Budget, "", new { @class = "text-danger" })
+        @*Budget*@
+        <div class="form-group" > 
+            @Html.LabelFor(model => model.Budget, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10"> 
+                @Html.EditorFor(model => model.Budget, new { htmlAttributes = new { @class = "form-control", @min = "0", @step = "10" } })
+                @Html.ValidationMessageFor(model => model.Budget, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    @*Cuisine Type*@
-    <div class="form-group">
-        <label class="control-label col-md-2" for="categoryDropdown">Category</label>
-        <div class="col-md-10">
-            <select class="form-control" name="categoryDropdown" id="categoryDropdown">
-                <option value="american" selected>American</option>
-                <option value="italian">Italian</option>
-                <option value="seafood">Seafood</option>
-                <option value="mexican">Mexican</option>
-                <option value="vegetarian">Vegetarian</option>
-                <option value="southern">Southern</option>
-                <option value="asian">Asian</option>
-            </select>
-            <span class="field-validation-valid text-danger" data-valmsg-for="Category" data-valmsg-replace="true"></span>
+        @*Cuisine Type*@
+        <div class="form-group">
+            <label class="control-label col-md-2" for="categoryDropdown">Category</label>
+            <div class="col-md-10">
+                <select class="form-control" name="categoryDropdown" id="categoryDropdown">
+                    <option value="american" selected>American</option>
+                    <option value="italian">Italian</option>
+                    <option value="seafood">Seafood</option>
+                    <option value="mexican">Mexican</option>
+                    <option value="vegetarian">Vegetarian</option>
+                    <option value="southern">Southern</option>
+                    <option value="asian">Asian</option>
+                    <option value="coffee">Coffee</option>
+                    <option value="deli">Deli</option>
+                    <option value="pub food">Pub Food</option>
+                    <option value="thai">Thai</option>
+                    <option value="soup">Soup</option>
+                    <option value="mediterranean">Mediterranean</option>
+                    <option value="sushi">Sushi</option>
+                    <option value="pizza">Pizza</option>
+                </select>
+                <span class="field-validation-valid text-danger" data-valmsg-for="Category" data-valmsg-replace="true"></span>
+            </div>
         </div>
-    </div>
 
     @*Zip Code*@
     <div class="form-group">
