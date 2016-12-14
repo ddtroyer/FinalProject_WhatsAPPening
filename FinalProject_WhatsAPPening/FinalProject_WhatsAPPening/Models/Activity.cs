@@ -18,6 +18,10 @@ namespace FinalProject_WhatsAPPening
         
         public string Category { get; set; }
 
+        public string ImageUrl { get; set; }
+        public string ImageUrlLarge { get; set; }
+
+
         [DisplayName("Website")]
         [RegularExpression(@"^[a-zA-Z0-9\-\.]+\.(com|org|net|mil|edu|COM|ORG|NET|MIL|EDU)$", ErrorMessage = "Invalid website.")]
         public string Link { get; set; }
