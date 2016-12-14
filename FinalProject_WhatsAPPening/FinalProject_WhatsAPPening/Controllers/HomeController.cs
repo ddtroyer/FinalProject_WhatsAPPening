@@ -212,6 +212,14 @@ namespace FinalProject_WhatsAPPening.Controllers
             return View();
         }
 
+        public
+            ActionResult About()
+        {
+            ViewBag.Message = "WhatsAppening";
+
+            return View();
+        }
+
         public List<Activity> ActivitiesRequest(string QueryURL)
         {
 
