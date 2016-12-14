@@ -4,13 +4,13 @@
 }
 
 
-<h2>What to Do?</h2>
+<h2>Looking for something to do?</h2>
 @using (Html.BeginForm())
 { 
 @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
-    <h4>Enter the number of people and total budget, then select a cuisine type: </h4>
+    <h4>Enter a bit of info below and we'll help you make your plans!</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 

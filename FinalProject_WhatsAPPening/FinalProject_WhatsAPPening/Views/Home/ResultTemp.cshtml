@@ -10,46 +10,82 @@
     ViewBag.Title = "ResultTemp";
     Session["RvModel"] = Model;
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        div.container {
+            width: 100%;
+            @*border: 1px solid gray;
+            *@;
+        }
+
+        nav {
+            float: right;
+            max-width: 160px;
+            margin: 0;
+            padding: 1em;
+        }
+
+        article {
+            margin-right: 400px;
+            border-right: 1px solid gray;
+            padding: 1em;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
 
 
+        <nav id="ActivityPicture">
+            <img src=@Model.ActivityResult.ImageUrlLarge alt=@Model.ActivityResult.Venue style="width:304px;height:228px;">
+        </nav>
+        <article>
+            <h1>Results!</h1>
+            <form action="/Home/GetAnotherActivity" method="post">
+                <font size="3">
+                    What to do:
+                    <a href="@Model.ActivityResult.Link" target="_blank">
+                        @Model.ActivityResult.Venue
+                    </a> located at @Model.ActivityResult.StreetAddress , @Model.ActivityResult.City
 
-<h1>Results!</h1>
+                    <p>Price per person: $@Model.ActivityResult.PricePerPerson</p>
+                    <p>
+                        <input type="button" onclick="xSubmit('A')" value="Select Another Activity" class="btn btn-default " />
+                    </p>
+                    <input type="text" style="visibility: hidden" name="ActivityID" value="@Model.ActivityResult.Id" />
+                    <br />
 
-<form action="/Home/GetAnotherActivity" method="post">
-    <font size="5">
-        What to do:
-        <a href="@Model.ActivityResult.Link" target="_blank">
-            @Model.ActivityResult.Venue
-        </a> located at @Model.ActivityResult.StreetAddress , @Model.ActivityResult.City
+                    Where to Eat:
+                    <a href="@Model.RestaurantResult.Website" target="_blank">
+                        @Model.RestaurantResult.Name
+                    </a> located at @Model.RestaurantResult.Address
+                    <p>Price per person: @Model.RestaurantResult.PriceRange</p>
+                    <p>
+                        <input type="button" onclick="xSubmit('R')" value="Select Another Restaurant" class="btn btn-default " />
+                    </p>
+                    <input type="text" style="visibility: hidden" name="RestaurantID" value="@Model.RestaurantResult.Id" />
+                </font>
+                <input type="text" style="visibility: hidden" name="ButtonClicked" id="ButtonClicked" />
+                <input id="hiddenSubmit" type="submit" style="visibility: hidden" />
+                <div>
+                    <hr />
+                    <dl class="dl-horizontal"></dl>
+                </div>
+                <p style="font-size: medium">
 
-        <p>Price per person: $@Model.ActivityResult.PricePerPerson</p>
-        <p><input type="button" onclick="xSubmit('A')" value="Select Another Activity" class="btn btn-default " /></p>
-        <input type="text" style="visibility:hidden" name="ActivityID" value="@Model.ActivityResult.Id"/>
-        <br />
-
-        Where to Eat:
-        <a href="@Model.RestaurantResult.Website" target="_blank">
-            @Model.RestaurantResult.Name
-        </a> located at @Model.RestaurantResult.Address
-        <p>Price per person: @Model.RestaurantResult.PriceRange</p>
-        <p><input type="button" onclick="xSubmit('R')" value="Select Another Restaurant" class="btn btn-default " /></p>
-        <input type="text" style="visibility:hidden" name="RestaurantID" value="@Model.RestaurantResult.Id" />
-    </font>
-    <input type="text" style="visibility:hidden" name="ButtonClicked"  id="ButtonClicked"  />
-    <input id="hiddenSubmit" type="submit" style="visibility:hidden"/>
-    <div>
-        <hr />
-        <dl class="dl-horizontal"></dl>
+                    @Html.ActionLink("Try Again", "Index")
+                </p>
+            </form>
+        </article>
     </div>
-    <p style="font-size:medium">
-
-        @Html.ActionLink("Try Again", "Index")
-    </p>
-</form>
+</body>
 <script>
 
-  var  xSubmit =function(value) {
-      $('#ButtonClicked').val (value);
-      $('#hiddenSubmit').click();
-  }
+    var xSubmit = function (value) {
+        $('#ButtonClicked').val(value);
+        $('#hiddenSubmit').click();
+    }
 </script>
