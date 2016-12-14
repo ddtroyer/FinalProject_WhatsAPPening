@@ -119,6 +119,7 @@ namespace FinalProject_WhatsAPPening.Controllers
                         restaurant.Description.Add(desVar.ToString());
                     }
 
+                    restaurant.Id = restaurants.Count;
                     restaurants.Add(restaurant);
                     //Now the 'restaurant' is added to the list named 'restaurants' and the foreach loop repeats this process (starting at line 57)
 
@@ -170,37 +171,15 @@ namespace FinalProject_WhatsAPPening.Controllers
  
             }
 
-            Random rnd = new Random();
+           
 
             result.Restuarants = restaurants;
-            if (restaurants.Count > 0)
-            {
-                int restInt = rnd.Next(0, restaurants.Count());
-                result.RestaurantResult = restaurants[restInt];
-            }
-            else
-            {
-                result.RestaurantResult = new Restaurant()
-                {
-                    Name = "No Restaurant Found"
-                };
-            }
+            result.SetRandomRestaurant();
 
             result.Activities = activities;
-            if (activities.Count > 0)
-            {
-                int actInt = rnd.Next(0, activities.Count());
-                result.ActivityResult = activities[actInt];
-            }
-            else
-            {
-                result.ActivityResult = new Activity()
-                {
-                    Venue = "No Activity Found",
-                    PricePerPerson = "0.00"
-                };
+            result.SetRandomActivity();
+            
 
-            }
             return View("ResultTemp", result);
         }
 
@@ -340,6 +319,26 @@ namespace FinalProject_WhatsAPPening.Controllers
 
             return returnString.ToString();
 
+        }
+
+        [HttpPost]
+        public ActionResult GetAnotherActivity(FormCollection form)
+        {
+
+            ResultViewModel Rvs = new ResultViewModel();
+            Rvs = (ResultViewModel)Session["RvModel"];
+            //int ActivityID = int.Parse(form["ActivityID"]);
+            //int RestuarantID = int.Parse(form["RestaurantID"]);
+
+            if (form["ButtonClicked"] == "R")
+            {
+                Rvs.SetRandomRestaurant();
+            }
+            else
+            {
+                Rvs.SetRandomActivity();
+            }
+            return View("ResultTemp", Rvs);
         }
 
     }
