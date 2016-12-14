@@ -215,6 +215,31 @@
   <ItemGroup>
     <Compile Include="Controllers\ManageActivityController.cs" />
     <Compile Include="Controllers\TicketmasterController.cs" />
+    <Compile Include="Migrations\201612141114413_Initial.cs" />
+    <Compile Include="Migrations\201612141114413_Initial.Designer.cs">
+      <DependentUpon>201612141114413_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612141125077_Migration 2.cs" />
+    <Compile Include="Migrations\201612141125077_Migration 2.Designer.cs">
+      <DependentUpon>201612141125077_Migration 2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612141143076_Migration 3.cs" />
+    <Compile Include="Migrations\201612141143076_Migration 3.Designer.cs">
+      <DependentUpon>201612141143076_Migration 3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612141223259_Migration 4.cs" />
+    <Compile Include="Migrations\201612141223259_Migration 4.Designer.cs">
+      <DependentUpon>201612141223259_Migration 4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612141248321_Migration 5.cs" />
+    <Compile Include="Migrations\201612141248321_Migration 5.Designer.cs">
+      <DependentUpon>201612141248321_Migration 5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612141257385_Migration 6.cs" />
+    <Compile Include="Migrations\201612141257385_Migration 6.Designer.cs">
+      <DependentUpon>201612141257385_Migration 6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Activity.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -234,6 +259,7 @@
     <Compile Include="Models\Request.cs" />
     <Compile Include="Models\Restaurant.cs" />
     <Compile Include="QueryHelper.cs" />
+    <Compile Include="ResultContext.cs" />
     <Compile Include="ViewModels\ResultViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -307,6 +333,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Random\" />
     <Folder Include="Views\Ticketmaster\" />
   </ItemGroup>
   <ItemGroup>
@@ -322,6 +349,26 @@
       <Project>{f2855863-9fae-4231-a9f5-b96aee793f6b}</Project>
       <Name>YelpAPI</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201612141114413_Initial.resx">
+      <DependentUpon>201612141114413_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612141125077_Migration 2.resx">
+      <DependentUpon>201612141125077_Migration 2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612141143076_Migration 3.resx">
+      <DependentUpon>201612141143076_Migration 3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612141223259_Migration 4.resx">
+      <DependentUpon>201612141223259_Migration 4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612141248321_Migration 5.resx">
+      <DependentUpon>201612141248321_Migration 5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612141257385_Migration 6.resx">
+      <DependentUpon>201612141257385_Migration 6.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

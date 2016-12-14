@@ -1,33 +1,55 @@
-﻿@model FinalProject_WhatsAPPening.Models.ResultViewModel
+﻿
+@using System
+@using FinalProject_WhatsAPPening.Models;
+@using FinalProject_WhatsAPPening;
+@*using Microsoft.Ajax.Utilities*@
+
+@model FinalProject_WhatsAPPening.Models.ResultViewModel
 
 @{
     ViewBag.Title = "ResultTemp";
+    Session["RvModel"] = Model;
 }
+
+
 
 <h1>Results!</h1>
 
-
+<form action="/Home/GetAnotherActivity" method="post">
     <font size="5">
         What to do:
         <a href="@Model.ActivityResult.Link" target="_blank">
-            @Model.ActivityResult.Venue</a> located at @Model.ActivityResult.StreetAddress , @Model.ActivityResult.City
+            @Model.ActivityResult.Venue
+        </a> located at @Model.ActivityResult.StreetAddress , @Model.ActivityResult.City
 
         <p>Price per person: $@Model.ActivityResult.PricePerPerson</p>
-
+        <p><input type="button" onclick="xSubmit('A')" value="Select Another Activity" class="btn btn-default " /></p>
+        <input type="text" style="visibility:hidden" name="ActivityID" value="@Model.ActivityResult.Id"/>
         <br />
 
         Where to Eat:
         <a href="@Model.RestaurantResult.Website" target="_blank">
-             @Model.RestaurantResult.Name</a> located at @Model.RestaurantResult.Address 
+            @Model.RestaurantResult.Name
+        </a> located at @Model.RestaurantResult.Address
         <p>Price per person: @Model.RestaurantResult.PriceRange</p>
-
+        <p><input type="button" onclick="xSubmit('R')" value="Select Another Restaurant" class="btn btn-default " /></p>
+        <input type="text" style="visibility:hidden" name="RestaurantID" value="@Model.RestaurantResult.Id" />
     </font>
+    <input type="text" style="visibility:hidden" name="ButtonClicked"  id="ButtonClicked"  />
+    <input id="hiddenSubmit" type="submit" style="visibility:hidden"/>
+    <div>
+        <hr />
+        <dl class="dl-horizontal"></dl>
+    </div>
+    <p style="font-size:medium">
 
-<div>
-    <hr />
-    <dl class="dl-horizontal"></dl>
-</div>
-<p style="font-size:medium">
+        @Html.ActionLink("Try Again", "Index")
+    </p>
+</form>
+<script>
 
-    @Html.ActionLink("Try Again", "Index")
-</p>
+  var  xSubmit =function(value) {
+      $('#ButtonClicked').val (value);
+      $('#hiddenSubmit').click();
+  }
+</script>

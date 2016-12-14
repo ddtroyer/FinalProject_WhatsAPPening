@@ -9,14 +9,10 @@ using System.Web.Mvc;
 using FinalProject_WhatsAPPening.Models;
 using FactualDriver;
 using Newtonsoft.Json.Linq;
-using System;
 using YelpAPI;
-using System.Net;
 using System.Security.Cryptography.Xml;
-using System.Text;
-using Newtonsoft.Json.Linq;
 using SimpleOAuth;
-using FinalProject_WhatsAPPening.Models;
+
 
 namespace FinalProject_WhatsAPPening.Controllers
 {
@@ -123,6 +119,7 @@ namespace FinalProject_WhatsAPPening.Controllers
                         restaurant.Description.Add(desVar.ToString());
                     }
 
+                    restaurant.Id = restaurants.Count;
                     restaurants.Add(restaurant);
                     //Now the 'restaurant' is added to the list named 'restaurants' and the foreach loop repeats this process (starting at line 57)
 
@@ -174,37 +171,15 @@ namespace FinalProject_WhatsAPPening.Controllers
  
             }
 
-            Random rnd = new Random();
+           
 
             result.Restuarants = restaurants;
-            if (restaurants.Count > 0)
-            {
-                int restInt = rnd.Next(0, restaurants.Count());
-                result.RestaurantResult = restaurants[restInt];
-            }
-            else
-            {
-                result.RestaurantResult = new Restaurant()
-                {
-                    Name = "No Restaurant Found"
-                };
-            }
+            result.SetRandomRestaurant();
 
             result.Activities = activities;
-            if (activities.Count > 0)
-            {
-                int actInt = rnd.Next(0, activities.Count());
-                result.ActivityResult = activities[actInt];
-            }
-            else
-            {
-                result.ActivityResult = new Activity()
-                {
-                    Venue = "No Activity Found",
-                    PricePerPerson = "0.00"
-                };
+            result.SetRandomActivity();
+            
 
-            }
             return View("ResultTemp", result);
         }
 
@@ -246,8 +221,16 @@ namespace FinalProject_WhatsAPPening.Controllers
                     dynamic classifications = activityDyn["classifications"];
                     dynamic genre = classifications[0]["genre"];
                     dynamic segment = classifications[0]["segment"];
-                    string segName = segment.name;
-                    string genreName = genre.name;
+
+                    string segName = null;
+                    string genreName = null;
+
+
+                    if (segment != null)
+                    segName = segment.name;
+
+                    if(genre != null)
+                    genreName = genre.name;
 
                     if (!String.IsNullOrWhiteSpace(segName))
                     {
@@ -336,6 +319,26 @@ namespace FinalProject_WhatsAPPening.Controllers
 
             return returnString.ToString();
 
+        }
+
+        [HttpPost]
+        public ActionResult GetAnotherActivity(FormCollection form)
+        {
+
+            ResultViewModel Rvs = new ResultViewModel();
+            Rvs = (ResultViewModel)Session["RvModel"];
+            //int ActivityID = int.Parse(form["ActivityID"]);
+            //int RestuarantID = int.Parse(form["RestaurantID"]);
+
+            if (form["ButtonClicked"] == "R")
+            {
+                Rvs.SetRandomRestaurant();
+            }
+            else
+            {
+                Rvs.SetRandomActivity();
+            }
+            return View("ResultTemp", Rvs);
         }
 
     }

@@ -18,6 +18,7 @@ namespace FinalProject_WhatsAPPening
         public string Category { get; set; }
 
         [DisplayName("Website")]
+        [RegularExpression(@"^[a-zA-Z0-9\-\.]+\.(com|org|net|mil|edu|COM|ORG|NET|MIL|EDU)$", ErrorMessage = "Invalid website.")]
         public string Link { get; set; }
 
         [DisplayName("Venue Name")]
@@ -41,10 +42,14 @@ namespace FinalProject_WhatsAPPening
         public string State { get; set; }
 
         [DisplayName("Zip")]
+        [Required(ErrorMessage = "Please enter a zipcode.")]
+        [RegularExpression(@"^\d{5}?$", ErrorMessage = "Invalid zip code.")]
         [StringLength(50)]
         public string Zip { get; set; }
 
         [DisplayName("Phone Number")]
+        [Required(ErrorMessage = "Phone number must be in the following format: xxx-xxx-xxxx.")]
+        [RegularExpression(@"((\(\d{3}\))|(\d{3}-))\d{3}-\d{4}", ErrorMessage ="Invalid phone number.")]
         [StringLength(50)]
         public string PhoneNumber { get; set; }
 
