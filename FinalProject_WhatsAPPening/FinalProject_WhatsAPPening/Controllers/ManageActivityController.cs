@@ -34,6 +34,80 @@ namespace FinalProject_WhatsAPPening.Controllers
                 TempData["Error"] = ex.InnerException;
                 return View();
             }
+        } // GET: ManageActivity
+        [Authorize]
+        public ActionResult Edit(int id)
+        {
+                DBActivity db2 = new DBActivity();
+
+                return View(db2.Activities.Find(id));
+        }
+        // POST:
+        [Authorize]
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection collection)
+        {
+            try
+            {
+                DBActivity db2 = new DBActivity();
+                var foundActivity = db2.Activities.Find(id);
+
+                foundActivity.Venue = collection["Venue"];
+                foundActivity.Link = collection["Link"];
+                foundActivity.Category = collection["Category"];
+                foundActivity.StreetAddress = collection["StreetAddress"];
+                foundActivity.City = collection["City"];
+                foundActivity.State = collection["State"];
+                foundActivity.Zip = collection["Zip"];
+                foundActivity.DaysOpen = collection["DaysOpen"];
+                foundActivity.TimesOpen = collection["TimesOpen"];
+                foundActivity.PricePerPerson = collection["PricePerPerson"];
+                foundActivity.PhoneNumber = collection["PhoneNumber"];
+                db2.SaveChanges();
+
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.InnerException;
+                return View();
+            }
+        }
+        [Authorize]
+        public ActionResult List()
+        {
+            DBActivity db2 = new DBActivity();
+            return View(db2.Activities.ToList());
+        }
+        // GET: Activity/Delete/5
+        [Authorize]
+        public ActionResult Delete(int id)
+        {
+            DBActivity db2 = new DBActivity();
+            return View(db2.Activities.Find(id));
+        }
+
+        // POST: Activity/Delete/5
+        [Authorize]
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
+        {
+            try
+            {
+                DBActivity db2 = new DBActivity();
+                var foundActivity = db2.Activities.Find(id);
+
+                db2.Activities.Remove(foundActivity);
+                db2.SaveChanges();
+                return RedirectToAction("Index", "Home");
+
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.InnerException;
+                return View();
+                
+            }
         }
     }
 }
