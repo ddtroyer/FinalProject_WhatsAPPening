@@ -55,15 +55,18 @@ namespace FinalProject_WhatsAPPening.Controllers
             string data = null;
             try
             {
-                data = Factual.Fetch("restaurants", new Query() //The Fetch method parameters require a table name and a new query
-                   .Field("price")
-                   .Equal(price.ToString()) //'price' field set by 'int price' variable (int is then converted to a string) 
-                   .Field("cuisine")
-                   .Equal(dataRequest.CuisineType.ToLower()) //'cuisine' field set by 'dataRequest.CuisineType' variable (determined by form dropdown menu)
-                   .Field("postcode")
-                   .Equal(dataRequest.Zipcode)
-                   .Offset(0)
-                   .Limit(40));
+                data = Factual.Fetch("restaurants",
+                    new Query() //The Fetch method parameters require a table name and a new query
+                        .Field("price")
+                        .Equal(price.ToString())
+                        //'price' field set by 'int price' variable (int is then converted to a string) 
+                        .Field("cuisine")
+                        .Equal(dataRequest.CuisineType.ToLower())
+                        //'cuisine' field set by 'dataRequest.CuisineType' variable (determined by form dropdown menu)
+                        .Field("postcode")
+                        .Equal(dataRequest.Zipcode)
+                        .Offset(0)
+                        .Limit(40));
             }
             catch
             {
@@ -73,67 +76,75 @@ namespace FinalProject_WhatsAPPening.Controllers
             var jData = JObject.Parse(data); //'data' is being Parsed from string to JObject type
 
             List<Restaurant> restaurants = new List<Restaurant>(); //Initializing a new list of resaurants
-            Restaurant restaurant = new Restaurant(); //Each item in 'restaurants' list is initialized as a new 'restaurant'
+            //Each item in 'restaurants' list is initialized as a new 'restaurant'
 
             if (jData["Error"] == null)
             {
                 foreach (var gcVar in jData["response"]["data"].ToList())
                 {
+                    Restaurant restaurant = new Restaurant();
+                    dynamic restVar = JObject.Parse(gcVar.ToString());
+                    //'restVar' is created and holds the properties of a Resaurant object (these properties are from the Restaurant class: name, address, etc...)
 
-                    dynamic restVar = JObject.Parse(gcVar.ToString()); //'restVar' is created and holds the properties of a Resaurant object (these properties are from the Restaurant class: name, address, etc...)
+                    string tString = System.DateTime.Now.DayOfWeek.ToString().ToLower();
+                    //'tString' variable assigned value based on day of the week
+                    //Used for finding hours of operation for restaurants for the current day of the week
 
-                    string tString = System.DateTime.Now.DayOfWeek.ToString().ToLower(); //'tString' variable assigned value based on day of the week
-                                                                                         //Used for finding hours of operation for restaurants for the current day of the week
-
-                if (restVar["hours"] != null)
-                {
-                    //TODO Format restaurant hours to display correctly
-                    var hours = restVar["hours"][tString];
-                    if (hours != null)
+                    if (restVar["hours"] != null)
                     {
-                        restaurant.Hours = hours.ToString();
-                    }
-                    
-                }
-                //The new Restaurant object named 'restaurant' has its properties assigned values. These values are taken from the 'restVar' variable
-                restaurant.Name = restVar.name;
-                restaurant.PriceRange = (PriceRange)restVar.price; //'PriceRange' is an enum found in the Restaurant class
-                restaurant.Address = restVar.address;
-                restaurant.ZipCode = restVar.postcode;
-                restaurant.Website = restVar.website;
+                        //TODO Format restaurant hours to display correctly
+                        var hours = restVar["hours"][tString];
+                        if (hours != null)
+                        {
+                            restaurant.Hours = hours.ToString();
+                        }
 
-                    restaurant.CuisineTypes = new List<string>(); //Many restaurants serve multiple cuisine types so a list is created to display these types
+                    }
+                    //The new Restaurant object named 'restaurant' has its properties assigned values. These values are taken from the 'restVar' variable
+                    restaurant.Name = restVar.name;
+                    restaurant.PriceRange = (PriceRange) restVar.price;
+                    //'PriceRange' is an enum found in the Restaurant class
+                    restaurant.Address = restVar.address;
+                    restaurant.ZipCode = restVar.postcode;
+                    restaurant.Website = restVar.website;
+
+                    restaurant.CuisineTypes = new List<string>();
+                    //Many restaurants serve multiple cuisine types so a list is created to display these types
                     foreach (var cuisineVar in restVar.cuisine)
                     {
-                        restaurant.CuisineTypes.Add(cuisineVar.ToString()); //The foreach loop iterates through the multiple types and adds them to the 'restaurant.CuisineTypes' list
+                        restaurant.CuisineTypes.Add(cuisineVar.ToString());
+                        //The foreach loop iterates through the multiple types and adds them to the 'restaurant.CuisineTypes' list
                     }
 
-                    restaurant.Description = new List<string>(); //Just like the CuisineTypes list foreach loop, but for restaurant description
+                    restaurant.Description = new List<string>();
+                    //Just like the CuisineTypes list foreach loop, but for restaurant description
                     foreach (var desVar in restVar.category_labels)
                     {
                         restaurant.Description.Add(desVar.ToString());
                     }
 
-                    restaurants.Add(restaurant); //Now the 'restaurant' is added to the list named 'restaurants' and the foreach loop repeats this process (starting at line 57)
+                    restaurants.Add(restaurant);
+                    //Now the 'restaurant' is added to the list named 'restaurants' and the foreach loop repeats this process (starting at line 57)
 
                 }
             }
-            else { restaurant.Name = "No Results Found"; }
+
 
             List<Activity> activities = new List<Activity>();
 
             string zipcode = form["Zipcode"];
             string qString = TMQueryString(zipcode, "10");
 
-            List<Activity> tempActivity = ActivitiesRequest(@"https://app.ticketmaster.com/discovery/v2/events.json?city=Grand%20Rapids&state=MI&countryCode=US&startDateTime=2016-12-13T00:00:00Z&apikey=oIsA0vq6NW2LaHLqAg6ySW7LZKblGGHT");
+            List<Activity> tempActivity =
+                ActivitiesRequest(
+                    @"https://app.ticketmaster.com/discovery/v2/events.json?city=Grand%20Rapids&state=MI&countryCode=US&startDateTime=2016-12-13T00:00:00Z&apikey=oIsA0vq6NW2LaHLqAg6ySW7LZKblGGHT");
 
             foreach (Activity activity in tempActivity)
             {
                 activities.Add(activity);
-
             }
 
-            if (zipcode.Substring(0,3) =="495")
+            if (zipcode.Substring(0, 3) == "495")
             {
                 using (DBActivity db = new DBActivity())
                 {
@@ -141,7 +152,7 @@ namespace FinalProject_WhatsAPPening.Controllers
                     {
                         if (activity.PricePerPerson != null)
                             if (double.Parse(activity.PricePerPerson) <=
-                                (dataRequest.Budget * .5 / dataRequest.numPeople))
+                                (dataRequest.Budget*.5/dataRequest.numPeople))
                             {
                                 Activity newActivity = new Activity();
                                 newActivity.Category = activity.Category;
@@ -157,20 +168,19 @@ namespace FinalProject_WhatsAPPening.Controllers
                                 newActivity.Venue = activity.Venue;
                                 newActivity.Zip = activity.Zip;
 
-                        activities.Add(newActivity);
+                                activities.Add(newActivity);
+                            }
                     }
                 }
+ 
             }
 
             Random rnd = new Random();
-            int restInt = rnd.Next(0, restaurants.Count());
-            int actInt = rnd.Next(0, activities.Count());
 
-                Restaurant modelRestaurant = restaurants[restInt];
-                Activity modelActivity = activities[actInt];
-
-                result.RestaurantResult = modelRestaurant;
-                result.ActivityResult = modelActivity;
+            if (restaurants.Count > 0)
+            {
+                int restInt = rnd.Next(0, restaurants.Count());
+                result.RestaurantResult = restaurants[restInt];
             }
             else
             {
@@ -178,15 +188,27 @@ namespace FinalProject_WhatsAPPening.Controllers
                 {
                     Name = "No Restaurant Found"
                 };
+            }
+
+            if (activities.Count > 0)
+            {
+                int actInt = rnd.Next(0, activities.Count());
+                result.ActivityResult = activities[actInt];
+            }
+            else
+            {
                 result.ActivityResult = new Activity()
                 {
-                    Venue = "No Activity Found"
+                    Venue = "No Activity Found",
+                    PricePerPerson = "$0.00"
                 };
+
             }
             return View("ResultTemp", result);
         }
 
-        public ActionResult Contact()
+        public
+            ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
@@ -233,6 +255,16 @@ namespace FinalProject_WhatsAPPening.Controllers
                     {
                         newActivity.Category = genreName;
                     }
+
+                }
+
+                if (activityDyn["priceRanges"] != null)
+                {
+                    dynamic priceRange = activityDyn["priceRanges"];
+                    decimal min = priceRange[0].min;
+                    decimal max = priceRange[0].max;
+                    decimal avg = ((min + max) / 2);
+                    newActivity.PricePerPerson = avg.ToString();
 
                 }
 

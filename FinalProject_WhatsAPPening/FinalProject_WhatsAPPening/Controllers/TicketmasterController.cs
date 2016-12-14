@@ -46,7 +46,15 @@ namespace FinalProject_WhatsAPPening.Controllers
                     DateTime hoursOpen = DateTime.Parse(dateTime);
                     newActivity.TimesOpen = hoursOpen.ToString("h:mm tt");
                 }
+                if (activityDyn["priceRanges"] != null)
+                {
+                    dynamic priceRange = activityDyn["priceRanges"];
+                    decimal min = priceRange[0].min;
+                    decimal max = priceRange[0].max;
+                    decimal avg = ((min + max)/2);
+                    newActivity.PricePerPerson = avg.ToString();
 
+                }
                 if (activityDyn["classifications"] != null)
                 {
                     dynamic classifications = activityDyn["classifications"];
