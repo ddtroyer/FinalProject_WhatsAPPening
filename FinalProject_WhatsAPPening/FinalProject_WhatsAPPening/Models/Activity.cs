@@ -31,7 +31,6 @@ namespace FinalProject_WhatsAPPening
         public string Venue { get; set; }
 
         [DisplayName("Average Price Per Person")]
-        [Required(ErrorMessage = "Please enter the average price per person.")]
         [StringLength(50)]
         public string PricePerPerson { get; set; }
 
@@ -53,8 +52,7 @@ namespace FinalProject_WhatsAPPening
         public string Zip { get; set; }
 
         [DisplayName("Phone Number")]
-        [Required(ErrorMessage = "Phone number must be in the following format: xxx-xxx-xxxx.")]
-        [RegularExpression(@"((\(\d{3}\))|(\d{3}-))\d{3}-\d{4}", ErrorMessage = "Invalid phone number.")]
+        [RegularExpression(@"((\(\d{3}\))|(\d{3}-))\d{3}-\d{4}", ErrorMessage = "Invalid format.")]
         [StringLength(50)]
         public string PhoneNumber { get; set; }
 
@@ -67,7 +65,6 @@ namespace FinalProject_WhatsAPPening
         public string TimesOpen { get; set; }
 
         [DisplayName("Other")]
-        [Required(ErrorMessage = "Enter additional applicable notes here.")]
         [StringLength(50)]
         public string Other { get; set; }
     }

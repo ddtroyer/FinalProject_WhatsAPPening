@@ -44,7 +44,7 @@
             <img src=@Model.ActivityResult.ImageUrlLarge alt=@Model.ActivityResult.Venue style="width:304px;height:228px;">
         </nav>
         <article>
-            <h1>Results!</h1>
+            <h1>Results! WhatsAppening suggests: </h1>
             <form action="/Home/GetAnotherActivity" method="post">
                 <font size="3">
                     What to do:
@@ -63,7 +63,8 @@
                     <a href="@Model.RestaurantResult.Website" target="_blank">
                         @Model.RestaurantResult.Name
                     </a> located at @Model.RestaurantResult.Address
-                    <p>Price per person: @Model.RestaurantResult.PriceRange</p>
+                    <p>Price per person: @if (@Model.RestaurantResult.Name == "No Restaurant Found") {
+                        @Html.Raw("Your taste is too expensive for us!");    } else {@Model.RestaurantResult.PriceRange}</p>
                     <p>
                         <input type="button" onclick="xSubmit('R')" value="Select Another Restaurant" class="btn btn-default " />
                     </p>

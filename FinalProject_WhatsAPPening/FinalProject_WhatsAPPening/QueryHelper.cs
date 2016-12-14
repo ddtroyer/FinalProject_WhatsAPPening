@@ -11,7 +11,7 @@ namespace FinalProject_WhatsAPPening
         {
             if (people == null)
             {
-                people = 2;     //If number of people is not entered by the user, number of peeople is set to 2 by default
+                people = 2;      //If number of people is not entered by the user, number of peeople is set to 2 by default
             }
 
             double budgetPerPerson = (double) (budget*.5/people);   //Takes half of the total budget for the resaurant. Assumes the other half will go towards 'Activity'
