@@ -34,9 +34,9 @@
 
         @*Cuisine Type*@
         <div class="form-group">
-            <label class="control-label col-md-2" for="categoryDropdown">Category</label>
+            <label class="control-label col-md-2" for="foodDropdown">Category</label>
             <div class="col-md-10">
-                <select class="form-control" name="categoryDropdown" id="categoryDropdown">
+                <select class="form-control" name="foodDropdown" id="foodDropdown">
                     <option value="american" selected>American</option>
                     <option value="italian">Italian</option>
                     <option value="seafood">Seafood</option>
@@ -56,6 +56,22 @@
                 <span class="field-validation-valid text-danger" data-valmsg-for="Category" data-valmsg-replace="true"></span>
             </div>
         </div>
+
+    @*Activity Category*@
+    <div class="form-group">
+        <label class="control-label col-md-2" for="categoryDropdown">Activity Category</label>
+        <div class="col-md-10">
+            <select class="form-control" name="categoryDropdown" id="categoryDropdown">
+                <option value="braodway" selected>Broadway</option>
+                <option value="theatre">Theatre</option>
+                <option value="sports">Sports</option>
+                <option value="family">Family</option>
+                <option value="musicals">Musicals</option>
+                <option value="comedy">Comedy</option>
+            </select>
+            <span class="field-validation-valid text-danger" data-valmsg-for="Category" data-valmsg-replace="true"></span>
+        </div>
+    </div>
 
     @*Zip Code*@
     <div class="form-group">

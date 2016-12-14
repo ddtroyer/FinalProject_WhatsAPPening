@@ -40,7 +40,8 @@ namespace FinalProject_WhatsAPPening.Controllers
             
             dataRequest.numPeople = int.Parse(form["numPeople"]);
             dataRequest.Budget = int.Parse(form["Budget"]);
-            dataRequest.CuisineType = form["categoryDropdown"];
+            dataRequest.CuisineType = form["foodDropdown"];
+            dataRequest.Category = form["categoryDropdown"];
             dataRequest.Zipcode = form["Zipcode"];
 
             
