@@ -24,7 +24,6 @@ namespace FinalProject_WhatsAPPening.Controllers
             return View("ResultTemp", model);
         }
 
-        
         public ActionResult RandomActivity(ResultViewModel model)
         {
             model.ActivityResult = randomActivity(model.Activities);

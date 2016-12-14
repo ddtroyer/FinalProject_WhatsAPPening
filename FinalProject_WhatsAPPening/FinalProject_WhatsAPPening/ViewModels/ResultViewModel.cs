@@ -15,5 +15,23 @@ namespace FinalProject_WhatsAPPening.Models
 
         public Restaurant RestaurantResult { get; set; }
         public List<Restaurant> Restuarants { get; set; }
+
+        
+
+        public ResultViewModel Mirror
+        {
+            get
+            {
+                ResultViewModel rvm = new ResultViewModel();
+               
+                rvm.ActivityResult = this.ActivityResult;
+                rvm.Activities = this.Activities;
+                rvm.RestaurantResult = this.RestaurantResult;
+                rvm.Restuarants = this.Restuarants;
+                return rvm;
+            }
+           
+        }
+
     }
 }

@@ -2,6 +2,7 @@
 @using System
 @using FinalProject_WhatsAPPening.Models;
 @using FinalProject_WhatsAPPening;
+@using Microsoft.Ajax.Utilities
 
 @model FinalProject_WhatsAPPening.Models.ResultViewModel
 
@@ -18,9 +19,9 @@
         What to do:
         <a href="@Model.ActivityResult.Link" target="_blank">
             @Model.ActivityResult.Venue</a> located at @Model.ActivityResult.StreetAddress , @Model.ActivityResult.City
-         
+          
         <p>Price per person: $@Model.ActivityResult.PricePerPerson</p>
-        <p><input type="submit" value="Random Activity" class="btn btn-default " onclick="location.href='@Url.Action("RandomActivity","Random",new {model = Model})'" /></p>
+        <p><input type="button" value="Random Activity" class="btn btn-default " onclick="location.href='@Url.Action("RandomActivity","Random", new { model = Model.Mirror})'" /></p>
 
         <br />
 
