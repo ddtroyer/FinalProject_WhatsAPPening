@@ -7,11 +7,11 @@ namespace FinalProject_WhatsAPPening
 {
     public class QueryHelper
     {
-        public static string RestaurantPrice(int budget, int? people) //the budget parameter must be entered. People is set by default if that parameter is not entered
+        public static string RestaurantPrice(int budget, int? people) //The budget parameter must be entered. People is set by default if that parameter is not entered
         {
             if (people == null)
             {
-                people = 2;      //If number of people is not entered by the user, number of peeople is set to 2 by default
+                people = 2;      //If number of people is not entered by the user, number of people is set to 2 by default
             }
 
             double budgetPerPerson = (double) (budget*.5/people);   //Takes half of the total budget for the resaurant. Assumes the other half will go towards 'Activity'
@@ -36,6 +36,6 @@ namespace FinalProject_WhatsAPPening
             {
                 return "5";
             }
-        }   //These values of 0, 1, 2, or 3 determine the value assigned to 'int price' variable in the HomeController
+        }   //These values of 1, 2, 3, 4, or 5 determine the value assigned to 'string price' variable in the HomeController
     }
 }
