@@ -136,11 +136,15 @@ namespace FinalProject_WhatsAPPening.Controllers
             foreach (Activity activity in tempActivity)
             {
 
-                
-                if (decimal.Parse(activity.PricePerPerson) <= (((decimal)dataRequest.Budget / 2) / (decimal)dataRequest.numPeople))
+                if (activity.PricePerPerson != null)
                 {
-                    activities.Add(activity);
+                    if (decimal.Parse(activity.PricePerPerson) <= (((decimal)dataRequest.Budget / 2) / (decimal)dataRequest.numPeople))
+                    {
+                        activities.Add(activity);
+                    }
+
                 }
+                
 
             }
 
