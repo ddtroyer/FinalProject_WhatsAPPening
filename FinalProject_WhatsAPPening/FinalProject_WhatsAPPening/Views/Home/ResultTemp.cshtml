@@ -20,11 +20,18 @@
             *@;
         }
 
+        .img_1 {
+            float: right;
+            position: relative;
+            margin: 10px 15px 15px 10px;
+        }
+
         nav {
             float: right;
             max-width: 160px;
             margin: 0;
             padding: 1em;
+            text-align: left;
         }
 
         article {
@@ -41,11 +48,11 @@
 
 
         <nav id="ActivityPicture">
-            <img src=@Model.ActivityResult.ImageUrlLarge alt=@Model.ActivityResult.Venue style="width:304px;height:228px;">
+            <img class="img_1" src=@Model.ActivityResult.ImageUrlLarge alt=@Model.ActivityResult.Venue style="width:304px;height:228px;">
         </nav>
         <article>
             <h1>Results! WhatsAPPening suggests: </h1>
-            
+
             <form action="/Home/GetAnotherActivity" method="post">
                 <font size="3">
                     What to do:
@@ -64,8 +71,14 @@
                     <a href="@Model.RestaurantResult.Website" target="_blank">
                         @Model.RestaurantResult.Name
                     </a> located at @Model.RestaurantResult.Address
-                    <p>Price per person: @if (@Model.RestaurantResult.Name == "No Restaurant Found") {
-                        @Html.Raw("Your taste is too expensive for us!");    } else {@Model.RestaurantResult.PriceRange}</p>
+                    <p>
+                        Price per person: @if (@Model.RestaurantResult.Name == "No Restaurant Found")
+                        {
+                            @Html.Raw("Your taste is too expensive for us!");
+                        }
+                        else
+                        {@Model.RestaurantResult.PriceRange}
+                    </p>
                     <p>
                         <input type="button" onclick="xSubmit('R')" value="Select Another Restaurant" class="btn btn-default " />
                     </p>
@@ -85,6 +98,7 @@
         </article>
     </div>
 </body>
+</html>
 <script>
 
     var xSubmit = function (value) {
