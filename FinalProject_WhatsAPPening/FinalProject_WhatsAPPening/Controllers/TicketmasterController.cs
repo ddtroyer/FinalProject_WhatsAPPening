@@ -23,18 +23,13 @@ namespace FinalProject_WhatsAPPening.Controllers
             @"https://app.ticketmaster.com/discovery/v2/events.json?city=Grand%20Rapids&state=MI&countryCode=US&startDateTime=2016-12-13T00:00:00Z&apikey=oIsA0vq6NW2LaHLqAg6ySW7LZKblGGHT";
 
 
-
         public ActionResult Index()
         {
-
             JObject response = PerformRequest(url);
 
 
             foreach (var activity in response["_embedded"]["events"].ToList())
             {
-
-
-                
                 dynamic activityDyn = JObject.Parse(activity.ToString());
                 Activity newActivity = new Activity();
 
@@ -55,6 +50,7 @@ namespace FinalProject_WhatsAPPening.Controllers
                     newActivity.PricePerPerson = avg.ToString();
 
                 }
+
                 if (activityDyn["classifications"] != null)
                 {
                     dynamic classifications = activityDyn["classifications"];
@@ -92,19 +88,9 @@ namespace FinalProject_WhatsAPPening.Controllers
 
                 }
 
-                
-
-               
-
-       
-
-
-        
-
             }
             return View();
 
-            
         }
         private static JObject PerformRequest(string baseURL)
         {
