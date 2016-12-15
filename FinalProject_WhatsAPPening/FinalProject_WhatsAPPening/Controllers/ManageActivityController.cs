@@ -1,6 +1,7 @@
 ﻿using FinalProject_WhatsAPPening;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -76,7 +77,19 @@ namespace FinalProject_WhatsAPPening.Controllers
                 foundActivity.PhoneNumber = collection["PhoneNumber"];
                 db2.SaveChanges();
 
-                return RedirectToAction("Index", "List", "ManageActivity");
+                return RedirectToAction("List", "ManageActivity");
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                     foreach (var ve in eve.ValidationErrors)
+                    {
+                        TempData["Error"] = string.Format("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                return View();
             }
             catch (Exception ex)
             {
