@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -41,9 +41,10 @@ namespace FinalProject_WhatsAPPening.Models
 
     public enum PriceRange
     {
-        Cheap,
+        Cheap = 1,
         Moderate,
         High,
-        Expensive
+        Expensive,
+        VeryExpensive
     }
 }

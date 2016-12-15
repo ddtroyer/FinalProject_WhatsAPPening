@@ -14,7 +14,7 @@ using System.Security.Cryptography.Xml;
 using SimpleOAuth;
 
 
-namespace FinalProject_WhatsAPPening.Controllers
+namespace FinalProject_WhatsAPPening.Controllers 
 {
 
     public class HomeController : Controller
@@ -45,8 +45,8 @@ namespace FinalProject_WhatsAPPening.Controllers
             dataRequest.Zipcode = form["Zipcode"];
 
 
-            //'price' variable is assigned to 1,2,3,or 4. This value is created by methods in the QueryHelper class
-            int price = QueryHelper.RestaurantPrice(dataRequest.Budget, dataRequest.numPeople);
+            //'price' variable is assigned to 1,2,3, 4, or 5 . This value is created by methods in the QueryHelper class
+            string price = QueryHelper.RestaurantPrice(dataRequest.Budget, dataRequest.numPeople);
 
             //New FactualDriver object being created using the variable names previously assigned to keys
             Factual Factual = new Factual(OATHKEY, OATHSECRET);
@@ -56,15 +56,13 @@ namespace FinalProject_WhatsAPPening.Controllers
                 data = Factual.Fetch("restaurants",
                     new Query() //The Fetch method parameters require a table name and a new query
                         .Field("price")
-                        .Equal(price.ToString())
-                        //'price' field set by 'int price' variable (int is then converted to a string) 
+                        .Equal(price) //'price' field set by 'string price' variable 
                         .Field("cuisine")
                         .Equal(dataRequest.CuisineType.ToLower())
-                        //'cuisine' field set by 'dataRequest.CuisineType' variable (determined by form dropdown menu)
                         .Field("postcode")
                         .Equal(dataRequest.Zipcode)
                         .Offset(0)
-                        .Limit(40));
+                        .Limit(20));
             }
             catch
             {
@@ -141,7 +139,8 @@ namespace FinalProject_WhatsAPPening.Controllers
 
             if (zipcode.Substring(0, 3) == "495")
             {
-                using (DBActivity db = new DBActivity())                {
+                using (DBActivity db = new DBActivity())
+                {
                     foreach (var activity in db.Activities)
                     {
                         if (activity.DaysOpen != null)
@@ -163,7 +162,12 @@ namespace FinalProject_WhatsAPPening.Controllers
                                 newActivity.Venue = activity.Venue;
                                 newActivity.Zip = activity.Zip;
 
-                                activities.Add(newActivity);
+
+                                if (decimal.Parse(newActivity.PricePerPerson) <= ((dataRequest.Budget / 2) / dataRequest.numPeople))
+                                {
+                                    activities.Add(newActivity);
+                                }
+
                             }
                     }
                 }
@@ -208,10 +212,6 @@ namespace FinalProject_WhatsAPPening.Controllers
             if (response["_embedded"] != null)
                 foreach (var activity in response["_embedded"]["events"].ToList())
                 {
-
-
-
-
                     dynamic activityDyn = JObject.Parse(activity.ToString());
                     Activity newActivity = new Activity();
 
@@ -232,7 +232,6 @@ namespace FinalProject_WhatsAPPening.Controllers
 
                         string segName = null;
                         string genreName = null;
-
 
                         if (segment != null)
                             segName = segment.name;
@@ -311,6 +310,7 @@ namespace FinalProject_WhatsAPPening.Controllers
 
                     }
 
+                    
                     activities.Add(newActivity);
                 }
 
@@ -333,9 +333,6 @@ namespace FinalProject_WhatsAPPening.Controllers
             var stream = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
 
             return JObject.Parse(stream.ReadToEnd());
-
-
-
 
         }
 
