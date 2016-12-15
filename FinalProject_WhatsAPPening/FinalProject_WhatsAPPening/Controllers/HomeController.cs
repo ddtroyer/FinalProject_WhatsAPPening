@@ -54,9 +54,9 @@ namespace FinalProject_WhatsAPPening.Controllers
             try
             {
                 data = Factual.Fetch("restaurants",
-                    new Query() //The Fetch method parameters require a table name and a new query
+                    new Query()
                         .Field("price")
-                        .Equal(price) //'price' field set by 'string price' variable 
+                        .Equal(price)
                         .Field("cuisine")
                         .Equal(dataRequest.CuisineType.ToLower())
                         .Field("postcode")
@@ -120,13 +120,14 @@ namespace FinalProject_WhatsAPPening.Controllers
 
                     restaurant.Id = restaurants.Count;
                     restaurants.Add(restaurant);
-                    //Now the 'restaurant' is added to the list named 'restaurants' and the foreach loop repeats this process (starting at line 57)
+                    //Now the 'restaurant' is added to the list named 'restaurants' and the foreach loop repeats this process 
 
                 }
             }
 
+            string activityCategory = form["categoryDropdown"];
             string zipcode = form["Zipcode"];
-            string qString = TMQueryString(zipcode, "10");
+            string qString = TMQueryString(zipcode, activityCategory, "10");
 
             List<Activity> activities = new List<Activity>();
             List<Activity> tempActivity = ActivitiesRequest(qString);
@@ -134,7 +135,21 @@ namespace FinalProject_WhatsAPPening.Controllers
 
             foreach (Activity activity in tempActivity)
             {
-                activities.Add(activity);
+
+                if (activity.PricePerPerson != null)
+                {
+                    if (decimal.Parse(activity.PricePerPerson) <= (((decimal)dataRequest.Budget / 2) / (decimal)dataRequest.numPeople))
+                    {
+                        activities.Add(activity);
+                    }
+
+                }
+                else
+                {
+                    activities.Add(activity);
+                }
+                
+
             }
 
             if (zipcode.Substring(0, 3) == "495")
@@ -162,8 +177,8 @@ namespace FinalProject_WhatsAPPening.Controllers
                                 newActivity.Venue = activity.Venue;
                                 newActivity.Zip = activity.Zip;
 
-
-                                if (decimal.Parse(newActivity.PricePerPerson) <= ((dataRequest.Budget / 2) / dataRequest.numPeople))
+                                decimal activityBudget = (((decimal)dataRequest.Budget / 2) / (decimal)dataRequest.numPeople);
+                                if (decimal.Parse(newActivity.PricePerPerson) <= activityBudget)
                                 {
                                     activities.Add(newActivity);
                                 }
@@ -336,7 +351,7 @@ namespace FinalProject_WhatsAPPening.Controllers
 
         }
 
-        public string TMQueryString(string postalCode, string radius = null)
+        public string TMQueryString(string postalCode, string category, string radius = null)
         {
             if (radius == null)
                 radius = "5";
@@ -351,6 +366,13 @@ namespace FinalProject_WhatsAPPening.Controllers
             returnString.Append(postalCode + "&");
             returnString.Append("radius=");
             returnString.Append(radius + "&");
+
+            if (category.ToLower() != "all")
+            {
+                returnString.Append("classificationName=");
+                returnString.Append(category.ToLower() + "&");
+            }
+
             returnString.Append("apikey=");
             returnString.Append(TMAPI);
 
