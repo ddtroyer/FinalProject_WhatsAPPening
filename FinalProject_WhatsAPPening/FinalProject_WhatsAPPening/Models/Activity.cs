@@ -23,7 +23,7 @@ namespace FinalProject_WhatsAPPening
 
 
         [DisplayName("Website")]
-        [RegularExpression(@"^[a-zA-Z0-9\-\.]+\.(com|org|net|mil|edu|COM|ORG|NET|MIL|EDU)$", ErrorMessage = "Invalid website.")]
+        [RegularExpression(@"^[a-zA-Z0-9\-\.]+\.(com|org|net|mil|edu|COM|ORG|NET|MIL|EDU|co)[/]?$", ErrorMessage = "Invalid website.")]
         public string Link { get; set; }
         
         [DisplayName("Venue Name")]
