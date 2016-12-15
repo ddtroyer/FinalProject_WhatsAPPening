@@ -330,6 +330,9 @@
     <Content Include="Views\Home\ResultTemp.cshtml" />
     <Content Include="Views\ManageActivity\AddActivityView.cshtml" />
     <Content Include="Views\Shared\ResultTemp.cshtml" />
+    <Content Include="Views\ManageActivity\Delete.cshtml" />
+    <Content Include="Views\ManageActivity\Edit.cshtml" />
+    <Content Include="Views\ManageActivity\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
