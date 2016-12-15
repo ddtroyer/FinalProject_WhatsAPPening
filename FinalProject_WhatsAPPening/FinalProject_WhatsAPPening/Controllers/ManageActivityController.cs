@@ -77,7 +77,7 @@ namespace FinalProject_WhatsAPPening.Controllers
                 foundActivity.PhoneNumber = collection["PhoneNumber"];
                 db2.SaveChanges();
 
-                return RedirectToAction("Index", "List", "ManageActivity");
+                return RedirectToAction("List", "ManageActivity");
             }
             catch (DbEntityValidationException e)
             {
