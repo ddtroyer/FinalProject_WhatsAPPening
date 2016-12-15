@@ -144,6 +144,10 @@ namespace FinalProject_WhatsAPPening.Controllers
                     }
 
                 }
+                else
+                {
+                    activities.Add(activity);
+                }
                 
 
             }
