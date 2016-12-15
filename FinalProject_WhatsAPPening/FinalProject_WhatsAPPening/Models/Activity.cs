@@ -13,9 +13,10 @@ namespace FinalProject_WhatsAPPening
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int? Id { get; set; }
         
-        public string Category { get; set; }
         [StringLength(50)]
         [Required(ErrorMessage = "Please enter a category.")]
+        public string Category { get; set; }
+        
 
         public string ImageUrl { get; set; }
         public string ImageUrlLarge { get; set; }
