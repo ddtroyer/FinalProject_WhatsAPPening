@@ -20,8 +20,8 @@ namespace FinalProject_WhatsAPPening.Controllers
     public class HomeController : Controller
     {
         //Assigning keys to shorter variable names
-        public const string OATHKEY = "FxpykhYWyCQ3Gsm58GhTVpnWNeY66aB1lwwXkV3g";
-        public const string OATHSECRET = "9xNJ1Swu3nKKyReU668knmNGGZqqhAtF1gnOQEQW";
+        public const string OATHKEY = "Qt1ZycPeO19yJ6wnviDdt3ZE1s7H3idQcarlI5Jo";
+        public const string OATHSECRET = "qUV5ZocmpXMd9v1M5AJT60JhlqHUFfptC57ustjE";
         public const string TMBaseURL = @"https://app.ticketmaster.com/discovery/v2/events.json?";
         public const string TMAPI = "oIsA0vq6NW2LaHLqAg6ySW7LZKblGGHT";
         //GET
@@ -158,7 +158,8 @@ namespace FinalProject_WhatsAPPening.Controllers
                 {
                     foreach (var activity in db.Activities)
                     {
-                        if (activity.DaysOpen != null)
+
+                        if (activity.DaysOpen != null && !string.IsNullOrWhiteSpace(activity.PricePerPerson))
                             if (double.Parse(activity.PricePerPerson) <=
                                 (dataRequest.Budget * .5 / dataRequest.numPeople))
                             {
